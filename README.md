@@ -27,3 +27,5 @@ defineCustomElements(window);
 02 Displaying photos
 
 03 Saving photos
+
+- Filesystem, https://capacitorjs.com/docs/apis/filesystem
