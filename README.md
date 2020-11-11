@@ -25,3 +25,5 @@ defineCustomElements(window);
 - Take a photo, https://capacitorjs.com/docs/apis/camera
 
 02 Displaying photos
+
+03 Saving photos
