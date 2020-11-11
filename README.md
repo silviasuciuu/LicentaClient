@@ -31,3 +31,5 @@ defineCustomElements(window);
 - Filesystem, https://capacitorjs.com/docs/apis/filesystem
 
 04 Loading photos
+
+05 Deleting photos
