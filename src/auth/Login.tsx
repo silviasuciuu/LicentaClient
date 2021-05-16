@@ -59,7 +59,6 @@ export const Login: React.FC<RouteComponentProps> = ({history}) => {
     }
 
     const handleSignUp = () => {
-        console.log('in sign uppppp '+tip)
         if (tip == undefined)
             alert('Alegeti tipul utilizatorului')
         else {

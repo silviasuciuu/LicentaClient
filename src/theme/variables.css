@@ -241,6 +241,16 @@ http://ionicframework.com/docs/theming/ */
   margin-right: auto;
 }
 
+
+.fields1 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  max-width: 30%;
+  margin-left: 20px;
+  margin-right: auto;
+}
+
 .rol {
   margin-top: 15px;
   margin-bottom: 15px;

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+import {Redirect, Route} from 'react-router-dom';
+import {IonApp, IonRouterOutlet} from '@ionic/react';
+import {IonReactRouter} from '@ionic/react-router';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -21,16 +21,21 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import { AuthProvider, Login, PrivateRoute } from './auth';
+import {AuthProvider, Login, PrivateRoute} from './auth';
 import SignUpAntrenor from "./signup/signup_antrenor/SignUpAntrenor";
+import {SignUpAntrenorProvider} from "./signup/signup_antrenor";
+
 const App: React.FC = () => (
     <IonApp>
         <IonReactRouter>
             <IonRouterOutlet>
                 <AuthProvider>
                     <Route path="/login" component={Login} exact={true}/>
-                    <Route path="/inregistrare_antrenor" component={SignUpAntrenor} exact={true}/>
-                    <Route path="/inregistrare_client" component={Login} exact={true}/>
+                    <SignUpAntrenorProvider>
+                        <Route path="/inregistrare_antrenor" component={SignUpAntrenor} exact={true}/>
+
+                        <Route path="/inregistrare_client" component={Login} exact={true}/>
+                    </SignUpAntrenorProvider>
 
                 </AuthProvider>
             </IonRouterOutlet>

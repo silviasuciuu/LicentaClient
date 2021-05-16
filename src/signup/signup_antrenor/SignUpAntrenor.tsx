@@ -40,11 +40,9 @@ const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
     const [confirma_parola, setConfirma_parola] = useState<string>();
     const [photoToDelete, setPhotoToDelete] = useState<Photo>();
     const handleLSignUpAntrenor = () => {
-
-
-        signUpAntrenor?.(nume, prenume, email, parola, varsta, descriere, poza);
-
+        signUpAntrenor?.(nume, prenume, email, parola, varsta, descriere, photoPath);
     };
+
     return (
         <IonPage>
             <IonHeader>
@@ -60,7 +58,6 @@ const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
                             <IonInput
                                 type="email"
                                 value={nume}
-
                                 onIonChange={e => setState({
                                     ...state,
                                     nume: e.detail.value || ''
@@ -146,7 +143,6 @@ const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
                             <IonInput
                                 type="number"
                                 value={varsta}
-
                                 onIonChange={e => setState({
                                     ...state,
                                     //@ts-ignore
@@ -174,14 +170,14 @@ const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
 
 
                 <IonImg
-                    style={{width: "500px", height: "500px", margin: "0 auto"}}
+                    style={{width: "200px", height: "200px", margin: "0 auto"}}
                     onClick={() => {
                         setPhotoToDelete(photos?.find(item => item.webviewPath === photoPath))
                     }}
-                    alt={"No photo"}
+                    alt={"Poza de profil"}
                     src={photoPath}
                 />
-                <IonFab vertical="bottom" horizontal="end" slot="fixed">
+                <IonFab vertical="bottom" horizontal="start" >
                     <IonFabButton
                         onClick={() => {
                             const photoTaken = takePhoto();
@@ -218,7 +214,6 @@ const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
                     ]}
                     onDidDismiss={() => setPhotoToDelete(undefined)}
                 />
-
 
                 <IonButton onClick={handleLSignUpAntrenor}>Next</IonButton>
             </IonContent>
