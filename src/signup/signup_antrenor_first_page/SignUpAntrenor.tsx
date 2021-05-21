@@ -18,6 +18,7 @@ import {SignUpAntrenorContext} from "./SignUpAntrenorProvider";
 import {Photo, usePhotoGallery} from "./usePhotoGallery";
 import {camera, trash,close} from "ionicons/icons";
 import {SignUpAntrenorProps} from "./signUpAntrenorApi";
+import {RouteComponentProps} from "react-router";
 
 
 interface SignUpAntrenorState {
@@ -30,7 +31,7 @@ interface SignUpAntrenorState {
     poza?: string;
 }
 
-const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
+const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
     const {signUpAntrenor} = useContext(SignUpAntrenorContext);
 
     const [state, setState] = useState<SignUpAntrenorState>({});
@@ -40,7 +41,12 @@ const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
     const [confirma_parola, setConfirma_parola] = useState<string>();
     const [photoToDelete, setPhotoToDelete] = useState<Photo>();
     const handleLSignUpAntrenor = () => {
+
         signUpAntrenor?.(nume, prenume, email, parola, varsta, descriere, photoPath);
+        history.push({
+            pathname: 'inregistrare_antrenor/sporturi',
+            state: { detail: email }
+        })
     };
 
     return (
@@ -56,7 +62,7 @@ const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
                         <IonItem>
                             <IonLabel position="floating"> Nume</IonLabel>
                             <IonInput
-                                type="email"
+                                type="text"
                                 value={nume}
                                 onIonChange={e => setState({
                                     ...state,
@@ -94,7 +100,6 @@ const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
                             <IonInput
                                 type="email"
                                 value={email}
-
                                 onIonChange={e => setState({
                                     ...state,
                                     email: e.detail.value || ''
@@ -143,6 +148,8 @@ const SignUpAntrenor: React.FC<SignUpAntrenorProps> = ({status}) => {
                             <IonInput
                                 type="number"
                                 value={varsta}
+                                // @ts-ignore
+                                min={0}
                                 onIonChange={e => setState({
                                     ...state,
                                     //@ts-ignore

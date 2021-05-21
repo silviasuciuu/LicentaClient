@@ -22,8 +22,11 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import {AuthProvider, Login, PrivateRoute} from './auth';
-import SignUpAntrenor from "./signup/signup_antrenor/SignUpAntrenor";
-import {SignUpAntrenorProvider} from "./signup/signup_antrenor";
+import SignUpAntrenor from "./signup/signup_antrenor_first_page/SignUpAntrenor";
+import {SignUpAntrenorProvider} from "./signup/signup_antrenor_first_page";
+import {SportProvider} from "./signup/signup_antrenor_second_page";
+import Sport from "./signup/signup_antrenor_second_page/Sport";
+import SportPage from "./signup/signup_antrenor_second_page/SportPage";
 
 const App: React.FC = () => (
     <IonApp>
@@ -33,10 +36,11 @@ const App: React.FC = () => (
                     <Route path="/login" component={Login} exact={true}/>
                     <SignUpAntrenorProvider>
                         <Route path="/inregistrare_antrenor" component={SignUpAntrenor} exact={true}/>
-
-                        <Route path="/inregistrare_client" component={Login} exact={true}/>
                     </SignUpAntrenorProvider>
-
+                    <SportProvider>
+                        <Route path="/inregistrare_antrenor/sporturi" component={SportPage} exact={true}/>
+                    </SportProvider>
+                    <Route exact path="/" render={() => <Redirect to="/login"/>}/>
                 </AuthProvider>
             </IonRouterOutlet>
         </IonReactRouter>
