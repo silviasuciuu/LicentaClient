@@ -16,9 +16,10 @@ import {
 } from '@ionic/react';
 import {SignUpAntrenorContext} from "./SignUpAntrenorProvider";
 import {Photo, usePhotoGallery} from "./usePhotoGallery";
-import {camera, trash,close} from "ionicons/icons";
-import {SignUpAntrenorProps} from "./signUpAntrenorApi";
+import {camera, trash, close} from "ionicons/icons";
+import {getAntrenorByEmail, SignUpAntrenorProps} from "./signUpAntrenorApi";
 import {RouteComponentProps} from "react-router";
+import {type} from "os";
 
 
 interface SignUpAntrenorState {
@@ -36,17 +37,34 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
 
     const [state, setState] = useState<SignUpAntrenorState>({});
     const [photoPath, setPhotoPath] = useState('');
-    const { photos, takePhoto, deletePhoto } = usePhotoGallery();
+    const {photos, takePhoto, deletePhoto} = usePhotoGallery();
     const {nume, prenume, email, parola, varsta, descriere, poza} = state;
     const [confirma_parola, setConfirma_parola] = useState<string>();
     const [photoToDelete, setPhotoToDelete] = useState<Photo>();
-    const handleLSignUpAntrenor = () => {
-
-        signUpAntrenor?.(nume, prenume, email, parola, varsta, descriere, photoPath);
-        history.push({
-            pathname: 'inregistrare_antrenor/sporturi',
-            state: { detail: email }
-        })
+    const handleLSignUpAntrenor = async () => {
+        let checkExist = await getAntrenorByEmail(email)
+        // @ts-ignore
+        let par1 = document.getElementById("p1").value
+        // @ts-ignore
+        let par2 = document.getElementById("p2").value
+        if (nume == '' || prenume == '' || email == '' || varsta == 0   || descriere == ''||photoPath=='')
+            alert('Toate campurile sunt obligatorii')
+        else{
+        // @ts-ignore
+        if (par1 == par2 && par1 != '' && parseInt(checkExist.data.length)==parseInt(0)) {
+            signUpAntrenor?.(nume, prenume, email, parola, varsta, descriere, photoPath);
+            history.push({
+                pathname: 'inregistrare_antrenor/sporturi',
+                state: {detail: email}
+            })
+        }}
+        // @ts-ignore
+        if (parseInt(checkExist.data.length)!=parseInt(0)) {
+            alert("Email existent")
+        }
+        if (par1 != par2 || par1 == '') {
+            alert('Parolele nu corespund sau sunt vide')
+        }
     };
 
     return (
@@ -116,6 +134,7 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
                         <IonItem>
                             <IonLabel position="floating"> Parola</IonLabel>
                             <IonInput
+                                id={"p1"}
                                 type="password"
                                 value={parola}
                                 onIonChange={e => setState({
@@ -133,6 +152,7 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
                         <IonItem>
                             <IonLabel position="floating">Confirma parola</IonLabel>
                             <IonInput
+                                id={"p2"}
                                 type="password"
                                 value={confirma_parola}
                                 onIonChange={e => setConfirma_parola(e.detail.value!)}
@@ -184,7 +204,7 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
                     alt={"Poza de profil"}
                     src={photoPath}
                 />
-                <IonFab vertical="bottom" horizontal="start" >
+                <IonFab vertical="bottom" horizontal="start">
                     <IonFabButton
                         onClick={() => {
                             const photoTaken = takePhoto();
@@ -221,6 +241,7 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
                     ]}
                     onDidDismiss={() => setPhotoToDelete(undefined)}
                 />
+
 
                 <IonButton onClick={handleLSignUpAntrenor}>Next</IonButton>
             </IonContent>

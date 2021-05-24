@@ -287,4 +287,6 @@ http://ionicframework.com/docs/theming/ */
 .spatiu {
   margin-right: 25px
 }
-
+.toolbar-background {
+  border: none;
+}

@@ -4,6 +4,7 @@ import {baseUrl, config, withLogs} from "../../core";
 import axios from 'axios';
 
 const signupAntrenorUrl = `http://${baseUrl}/antrenor/create`;
+const antrenorUrl = `http://${baseUrl}/antrenor`;
 
 export interface SignUpAntrenorProps {
     nume: string,
@@ -27,4 +28,11 @@ export const signUpAntrenor: (nume?: string, prenume?: string, email?: string, p
         descriere,
         poza
     }, config), 'signUpAntrenor');
+}
+export const getAntrenorByEmail: (email: string | undefined) => Promise<SignUpAntrenorProps[]> = email => {
+    return axios.get(antrenorUrl+'/email', {
+        headers: {
+            'email': "'"+email+"'"
+        }
+    });
 }

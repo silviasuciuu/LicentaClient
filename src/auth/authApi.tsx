@@ -11,3 +11,5 @@ export const login: (email?: string, parola?: string,tip?:string) => Promise<Aut
 
     return withLogs(axios.post(authUrl, { email, parola,tip }, config), 'login');
 }
+
+
