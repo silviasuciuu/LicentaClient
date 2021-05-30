@@ -4,8 +4,7 @@ import {baseUrl, config, withLogs} from "../../core";
 import axios from 'axios';
 
 const sportUrl = `http://${baseUrl}/sport`;
-const antrenorUrl = `http://${baseUrl}/antrenor`;
-const antrenorSporturiUrl = `http://${baseUrl}/antrenor_sporturi`;
+const antrenorSporturiUrl = `http://${baseUrl}/signup-antrenor`;
 export interface SportProps {
     denumire: string;
 }
@@ -32,7 +31,7 @@ export const getSportIdByNume: (denumire:string) => Promise<number> = (denumire)
 
 export const getAntrenorByEmail: (email:string) => Promise<number> =  (email) => {
     return withLogs(
-        axios.get(antrenorUrl+'/email', { headers:{
+        axios.get(antrenorSporturiUrl+'/email', { headers:{
             'email':email
             } }),'getAntrenorByEmail'
         );
@@ -40,8 +39,7 @@ export const getAntrenorByEmail: (email:string) => Promise<number> =  (email) =>
 
 
 export const salveazaSport: (id_antrenor: number, id_sport: number,experienta: number) => Promise<SportProps[]> = (id_antrenor,id_sport,experienta) => {
-  //  return withLogs(axios.post(authUrl, { email, parola,tip }, config), 'login');
-    return withLogs(axios.post(antrenorSporturiUrl+'/create', {id_antrenor,id_sport,experienta}, config), 'salveazaSport');
+    return withLogs(axios.post(antrenorSporturiUrl+'/create/antrenor-sporturi', {id_antrenor,id_sport,experienta}, config), 'salveazaSport');
 }
 
 

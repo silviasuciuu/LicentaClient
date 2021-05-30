@@ -55,7 +55,7 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
             signUpAntrenor?.(nume, prenume, email, parola, varsta, descriere, photoPath);
             history.push({
                 pathname: 'inregistrare_antrenor/sporturi',
-                state: {detail: email}
+                state: {detail: email,photo:photoPath}
             })
         }}
         // @ts-ignore

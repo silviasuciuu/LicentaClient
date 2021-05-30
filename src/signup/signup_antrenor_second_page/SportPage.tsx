@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {IonItem, IonLabel, IonButton, IonList, IonContent, IonPage, IonLoading} from '@ionic/react';
+import {IonItem, IonLabel, IonButton, IonList, IonContent, IonPage, IonLoading, IonImg, IonFab} from '@ionic/react';
 import {SportProps} from "./SportProps";
 import Sport from "./Sport";
 
@@ -20,13 +20,13 @@ const SportPage: React.FC<SportPropsExt> = ({}) => {
     function trimite(sport: Promise<number>, experienta: number, antrenorId: Promise<number>) {
 
         console.log(sport + "sport" + experienta + "exper" + antrenorId + "antrid")
-        salveazaSport(parseInt(String(antrenorId)),parseInt(String(sport)),parseInt(String(experienta)))
+        salveazaSport(parseInt(String(antrenorId)), parseInt(String(sport)), parseInt(String(experienta)))
 
     }
 
     const handleAlegereSporturi = async () => {
         const sports = await getSporturi();
-      //  console.log(sports[0].denumire + 'ssssssss')
+        //  console.log(sports[0].denumire + 'ssssssss')
         // @ts-ignore
         const antr = await getAntrenorByEmail(JSON.stringify(history.location.state.detail))
         // @ts-ignore
@@ -65,6 +65,8 @@ const SportPage: React.FC<SportPropsExt> = ({}) => {
                 {fetchingError && (
                     <div>{fetchingError.message || 'Failed to fetch students'}</div>
                 )}
+
+
             </IonContent>
             <IonButton onClick={handleAlegereSporturi}>Finalizare</IonButton>
         </IonPage>

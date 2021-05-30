@@ -290,3 +290,32 @@ http://ionicframework.com/docs/theming/ */
 .toolbar-background {
   border: none;
 }
+
+
+.antrenorProfilePage {
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  max-width: 80%;
+  margin-left: 50%;
+  margin-right: auto;
+}
+.antrenorProfilePageEmail {
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  max-width: 80%;
+  margin-left: 45%;
+  margin-right: auto;
+}
+.spatiuAntrenor {
+  margin-right: 150px
+}
+.antrenorProfilePageDescriere{
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  max-width: 80%;
+  margin-left: 35%;
+  margin-right: auto;
+}

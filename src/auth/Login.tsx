@@ -27,6 +27,7 @@ import {
 import {AuthContext} from './AuthProvider';
 import {getLogger} from '../core';
 import {personCircle} from "ionicons/icons";
+import {loginFct, loginGetId} from "./authApi";
 
 const log = getLogger('Login');
 
@@ -41,12 +42,22 @@ export const Login: React.FC<RouteComponentProps> = ({history}) => {
     const [state, setState] = useState<LoginState>({});
     const {email, parola, tip} = state;
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
         if (check() == 'wrong')
             alert('Completati toate campurile')
         else {
             log('handleLogin...');
             login?.(email, parola, tip);
+            var id = await loginGetId(email, parola, tip)
+            if (tip == 'antrenor')
+                history.push({
+                    pathname: '/antrenor',
+                    state: {id: id}
+                })
+            if (tip == 'client')
+                history.push('/client');
+
+
         }
     };
 
@@ -62,9 +73,9 @@ export const Login: React.FC<RouteComponentProps> = ({history}) => {
         if (tip == undefined)
             alert('Alegeti tipul utilizatorului')
         else {
-            if(tip=='antrenor')
+            if (tip == 'antrenor')
                 history.push('/inregistrare_antrenor');
-            if(tip=='client')
+            if (tip == 'client')
                 history.push('/inregistrare_client');
 
         }

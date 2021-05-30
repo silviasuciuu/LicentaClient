@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getLogger } from '../core';
-import { login as loginApi } from './authApi';
+import { loginFct as loginApi } from './authApi';
 
 const log = getLogger('AuthProvider');
 
@@ -16,7 +16,7 @@ export interface AuthState {
   email?: string;
   parola?: string;
   tip?: string;
-  token: string;
+  id: string;
 }
 
 const initialState: AuthState = {
@@ -24,7 +24,7 @@ const initialState: AuthState = {
   isAuthenticating: false,
   authenticationError: null,
   pendingAuthentication: false,
-  token: '',
+  id: '',
 };
 
 export const AuthContext = React.createContext<AuthState>(initialState);
@@ -35,10 +35,10 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [state, setState] = useState<AuthState>(initialState);
-  const { isAuthenticated, isAuthenticating, authenticationError, pendingAuthentication, token } = state;
+  const { isAuthenticated, isAuthenticating, authenticationError, pendingAuthentication,id } = state;
   const login = useCallback<LoginFn>(loginCallback, []);
   useEffect(authenticationEffect, [pendingAuthentication]);
-  const value = { isAuthenticated, login, isAuthenticating, authenticationError, token };
+  const value = { isAuthenticated, login, isAuthenticating, authenticationError, id };
   log('render');
   return (
     <AuthContext.Provider value={value}>
@@ -76,7 +76,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           isAuthenticating: true,
         });
         const { email, parola,tip } = state;
-        const { token } = await loginApi(email, parola,tip);
+        const { id } = await loginApi(email, parola,tip);
 
         if (canceled) {
           return;
@@ -84,7 +84,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         log('authenticate succeeded');
         setState({
           ...state,
-          token,
+          id,
           pendingAuthentication: false,
           isAuthenticated: true,
           isAuthenticating: false,

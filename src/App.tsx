@@ -29,6 +29,10 @@ import Sport from "./signup/signup_antrenor_second_page/Sport";
 import SportPage from "./signup/signup_antrenor_second_page/SportPage";
 import {SignUpClientProvider} from "./signup/singup_client";
 import SignUpClient from "./signup/singup_client/SignUpClient";
+import {AntrenorProvider} from "./pagina-antrenor/profilePage";
+import Antrenor from "./pagina-antrenor/profilePage/PaginaAntrenor";
+import PaginaAntrenor from "./pagina-antrenor/profilePage/PaginaAntrenor";
+import EditareAntrenor from "./pagina-antrenor/editPage/EditareAntrenor";
 
 const App: React.FC = () => (
     <IonApp>
@@ -45,6 +49,11 @@ const App: React.FC = () => (
                     <SignUpClientProvider>
                         <Route path="/inregistrare_client" component={SignUpClient} exact={true}/>
                     </SignUpClientProvider>
+                    <AntrenorProvider >
+                        <Route path="/antrenor" component={PaginaAntrenor} exact={true}/>
+                        <Route path="/antrenor/:id" component={EditareAntrenor} exact={true}/>
+
+                    </AntrenorProvider>
                     <Route exact path="/" render={() => <Redirect to="/login"/>}/>
                 </AuthProvider>
             </IonRouterOutlet>

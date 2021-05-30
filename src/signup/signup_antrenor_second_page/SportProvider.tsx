@@ -64,7 +64,6 @@ export const SportProvider: React.FC<SportProviderProps> = ({children}) => {
     function getSportsEffect() {
         let canceled = false;
         let sportss = fetchSports();
-        console.log("aaaaaaaa" + sportss)
         return () => {
             canceled = true;
         }
