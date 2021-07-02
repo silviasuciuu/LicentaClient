@@ -28,7 +28,6 @@ import {AuthContext} from './AuthProvider';
 import {getLogger} from '../core';
 import {personCircle} from "ionicons/icons";
 import {loginFct, loginGetId} from "./authApi";
-
 const log = getLogger('Login');
 
 interface LoginState {
@@ -49,14 +48,16 @@ export const Login: React.FC<RouteComponentProps> = ({history}) => {
             log('handleLogin...');
             login?.(email, parola, tip);
             var id = await loginGetId(email, parola, tip)
-            if (tip == 'antrenor')
-                history.push({
-                    pathname: '/antrenor',
-                    state: {id: id}
-                })
+
+
+            if (tip == 'antrenor') {
+                history.push(`/antrenor/${id}`)
+
+
+
+            }
             if (tip == 'client')
                 history.push('/client');
-
 
         }
     };

@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {IonItem, IonLabel, IonButton, IonList, IonContent, IonPage, IonLoading, IonImg, IonFab} from '@ionic/react';
 
-import {RouteComponentProps, useHistory} from "react-router";
+import {RouteComponentProps, useHistory, withRouter} from "react-router";
 import {PaginaAntrenorProps} from "./PaginaAntrenorProps";
 import {AntrenorContext} from "./PaginaAntrenorProvider";
 import {SignUpAntrenorProps} from "../../signup/signup_antrenor_first_page/signUpAntrenorApi";
@@ -12,22 +12,23 @@ interface AntrenorPropsExt extends RouteComponentProps<{
 }> {
 }
 
-
-const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history}) => {
+const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history,match}) => {
     const {antrenor, fetching, fetchingError} = useContext(AntrenorContext);
-    // @ts-ignore
-    const arr = antrenor?.filter(a => a.id == history.location.state.id)
+    const routeId = match.params.id || '';
+
+
+    const arr = antrenor?.filter(a => a.id == routeId)
 
     return (
         <IonPage>
             <IonContent>
-                <IonLoading isOpen={fetching} message="Fetching sports"/>
+                <IonLoading isOpen={fetching} message="Fetching antrenor"/>
                 {arr && (
                     <IonList>
                         {arr.map(({id, nume, prenume, email, varsta, nota, descriere, poza}) =>
                             <Antrenor key={id} id={id} nume={nume} prenume={prenume} email={email} varsta={varsta}
                                       nota={nota} descriere={descriere} poza={poza} onEdit={(id) => history.push({
-                                pathname: `/antrenor/${id}`,
+                                pathname: `/antrenor/edit/${id}`,
                                 state: {id: id}
                             })
 

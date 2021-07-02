@@ -11,11 +11,13 @@ const paginaAntrenorUrl = `http://${baseUrl}/antrenor`;
 
 
 export const getAntrenorById: (id: string ) => Promise<PaginaAntrenorProps[]> = id => {
-    return axios.get(paginaAntrenorUrl+'/id', {
+    return withLogs(axios.get(paginaAntrenorUrl+'/id', {
         headers: {
-            'id': "'"+id+"'"
+            'id': "'"+id+"'",
+            'Content-Type': 'application/json'
         }
-    });
+    }), 'getAntrenor');
+
 }
 
 

@@ -8,13 +8,11 @@ export interface AuthProps {
 }
 
 export const loginFct: (email?: string, parola?: string, tip?: string) => Promise<AuthProps> = async (email, parola, tip) => {
-    const res = await axios.post(authUrl, {email, parola, tip});
+  //  const res = await axios.post(authUrl, {email, parola, tip});
     return withLogs(axios.post(authUrl, {email, parola, tip}, config), 'login');
 }
 
-export const loginGetId: (email?: string, parola?: string, tip?: string) => Promise<AuthProps> = async (email, parola, tip) => {
+export const loginGetId: (email?: string, parola?: string, tip?: string) => Promise<string> = async (email, parola, tip) => {
     const res = await axios.post(authUrl, {email, parola, tip});
     return res.data.body
 }
-
-

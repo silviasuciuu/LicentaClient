@@ -48,9 +48,10 @@ const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, v
                             <IonMenuButton/>
                         ) : (
                             <>
-                                <IonButton >Acasa </IonButton>
                                 <IonButton onClick={() => onEdit(id)}>Editeaza profilul </IonButton>
                                 <IonButton routerLink={"/page-2"}>Transformarile mele</IonButton>
+                                <IonButton routerLink={"/page-2"}>Experienta mea</IonButton>
+
                             </>
                         )}
                     </div>

@@ -6,8 +6,10 @@ import {PaginaAntrenorProps} from "./PaginaAntrenorProps";
 import {getAntrenorById, getAntrenori} from "./PaginaAntrenorApi";
 import {AuthContext} from "../../auth";
 import {updateAntrenor} from "../editPage/EditAntrenorApi";
+import {AuthProps} from "../../auth/authApi";
 
 type SaveAntrenorFn = (antrenor: PaginaAntrenorProps) => Promise<any>;
+
 
 export interface AntrenorState {
     antrenor?: PaginaAntrenorProps[],
@@ -73,19 +75,21 @@ interface AntrenorProviderProps {
     children: PropTypes.ReactNodeLike,
 }
 
+
+
+
 export const AntrenorProvider: React.FC<AntrenorProviderProps> = ({children}) => {
-    const {id} = useContext(AuthContext);
-    console.log(id,'iddddddddddddddddddd')
+
     const [state, dispatch] = useReducer(antrenorreducer, initialStateAntrenor);
     const {
         antrenor, fetching, fetchingError, saving, savingError
     } = state;
 
     useEffect(getAntrenorEffect, []);
-    const saveAntrenor = useCallback<SaveAntrenorFn>(saveAntrenorCallback, [id]);
+    const saveAntrenor = useCallback<SaveAntrenorFn>(saveAntrenorCallback, []);
 
 
-    const value = {antrenor, fetching, saving, fetchingError};
+    const value = {antrenor, fetching, saving, fetchingError,saveAntrenor};
 
     return (
         <AntrenorContext.Provider value={value}>
@@ -119,8 +123,7 @@ export const AntrenorProvider: React.FC<AntrenorProviderProps> = ({children}) =>
     async function saveAntrenorCallback(antrenor: PaginaAntrenorProps) {
         log('saveAntrenor started');
         dispatch({type: SAVE_ANTRENOR_STARTED});
-        console.log(id)
-        const savedAntrenor = await (updateAntrenor(id, antrenor));
+        const savedAntrenor = await updateAntrenor( antrenor);
         log('saveAntrenor succeeded');
         dispatch({type: SAVE_ANTRENOR_SUCCEEDED, payload: {antrenor: savedAntrenor}});
     }

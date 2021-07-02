@@ -9,14 +9,11 @@ const antrenorUrl = `http://${baseUrl}/antrenor`;
 
 
 
-export const updateAntrenor: (id: string, antrenor: PaginaAntrenorProps) => Promise<PaginaAntrenorProps> = (id, antrenor) => {
+export const updateAntrenor: ( antrenor: PaginaAntrenorProps) => Promise<PaginaAntrenorProps> = ( antrenor) => {
     console.log(`${antrenorUrl}/'edit'`)
-    var result = axios.put(`${antrenorUrl}/'edit'`, antrenor);
+    var result = axios.put(`${antrenorUrl}/edit`, antrenor);
     result.then(async function (r) {
         var person = r.data;
     });
     return withLogs(result, "updatePerson");
 }
-
-
-

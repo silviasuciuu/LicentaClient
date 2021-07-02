@@ -38,13 +38,13 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
     const [antrenorr, setAntrenorr] = useState<PaginaAntrenorProps>();
     const {photos, takePhoto, deletePhoto} = usePhotoGallery();
     const [photoToDelete, setPhotoToDelete] = useState<Photo>();
-    // @ts-ignore
-    const arr = antrenor?.filter(a => a.id == history.location.state.id)
-    // @ts-ignore
+
+
 
     useEffect(() => {
         const routeId = match.params.id || '';
-        const antr = antrenor?.find(it => it.id === routeId);
+        const antr = antrenor?.find(it => it.id == routeId.toString());
+       // console.log(antr,'antrrr')
         setAntrenorr(antr);
         if (antr) {
             setNume(antr.nume);
@@ -60,6 +60,7 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
 
 
     const handleSave = () => {
+        console.log(antrenorr)
         const editedAntrenor = antrenorr
             ? {
                 ...antrenorr,
@@ -84,7 +85,6 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
         })
     };
 
-    // @ts-ignore
     return (
         <IonPage>
             <IonHeader>
@@ -99,31 +99,31 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
             </IonHeader>
             <IonContent>
 
-                    <IonList>
+                <IonList>
 
 
-                            <IonInput className="inputField" placeholder={"Nume"} value={nume}
-                                      onIonChange={e => setNume(e.detail.value || '')}/>
-                            <IonInput className="inputField" placeholder="Prenume" value={prenume}
-                            onIonChange={e => setPrenume(e.detail.value || '')}/>
-                            <IonInput className="inputField" placeholder="Email" value={email}
-                            onIonChange={e => setEmail(e.detail.value || '')}/>
-                            <IonInput type="number" placeholder="Varsta" value={varsta}
-                            // @ts-ignore
-                            onIonChange={e => setVarsta(parseInt(e.detail.value) || 0)}/>
-                            <IonTextarea value={descriere} onIonChange={e => setDescriere(e.detail.value || '')}>
+                    <IonInput className="inputField" placeholder={"Nume"} value={nume}
+                              onIonChange={e => setNume(e.detail.value || '')}/>
+                    <IonInput className="inputField" placeholder="Prenume" value={prenume}
+                              onIonChange={e => setPrenume(e.detail.value || '')}/>
+                    <IonInput className="inputField" placeholder="Email" value={email}
+                              onIonChange={e => setEmail(e.detail.value || '')}/>
+                    <IonInput type="number" placeholder="Varsta" value={varsta}
+                        // @ts-ignore
+                              onIonChange={e => setVarsta(parseInt(e.detail.value) || 0)}/>
+                    <IonTextarea value={descriere} placeholder="Descriere" onIonChange={e => setDescriere(e.detail.value || '')}>
 
-                            </IonTextarea>
+                    </IonTextarea>
 
-                            <IonImg
-                            style={{width: "100px", height: "100px", margin: "0 auto"}}
-                            onClick={() => {
+                    <IonImg
+                        style={{width: "100px", height: "100px", margin: "0 auto"}}
+                        onClick={() => {
                             setPhotoToDelete(photos?.find(item => item.webviewPath === poza))
                         }}
-                            alt={"No photo"}
-                            src={poza}
-                            />
-                    </IonList>
+                        alt={"No photo"}
+                        src={poza}
+                    />
+                </IonList>
 
                 <IonLoading isOpen={saving}/>
                 {savingError && (
