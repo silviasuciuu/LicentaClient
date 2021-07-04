@@ -19,7 +19,6 @@ const SportPage: React.FC<SportPropsExt> = ({}) => {
 
     function trimite(sport: Promise<number>, experienta: number, antrenorId: Promise<number>) {
 
-        console.log(sport + "sport" + experienta + "exper" + antrenorId + "antrid")
         salveazaSport(parseInt(String(antrenorId)), parseInt(String(sport)), parseInt(String(experienta)))
 
     }

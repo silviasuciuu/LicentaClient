@@ -6,7 +6,8 @@ import axios from 'axios';
 const sportUrl = `http://${baseUrl}/sport`;
 const antrenorSporturiUrl = `http://${baseUrl}/signup-antrenor`;
 export interface SportProps {
-    denumire: string;
+    denumire: string
+    experienta?:number
 }
 
 export interface SalvareSport {

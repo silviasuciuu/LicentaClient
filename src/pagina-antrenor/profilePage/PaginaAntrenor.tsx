@@ -12,7 +12,7 @@ interface AntrenorPropsExt extends RouteComponentProps<{
 }> {
 }
 
-const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history,match}) => {
+const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history, match}) => {
     const {antrenor, fetching, fetchingError} = useContext(AntrenorContext);
     const routeId = match.params.id || '';
 
@@ -32,7 +32,13 @@ const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history,match}) => {
                                 state: {id: id}
                             })
 
-                            }/>)}
+                            }
+                                      onExperienceEdit={(id) => history.push({
+                                          pathname: `/antrenor/experience_edit/${id}`,
+                                          state: {id: id}
+                                      })
+
+                                      }/>)}
                     </IonList>
                 )}
                 {fetchingError && (

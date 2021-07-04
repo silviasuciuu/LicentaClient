@@ -106,8 +106,6 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
                               onIonChange={e => setNume(e.detail.value || '')}/>
                     <IonInput className="inputField" placeholder="Prenume" value={prenume}
                               onIonChange={e => setPrenume(e.detail.value || '')}/>
-                    <IonInput className="inputField" placeholder="Email" value={email}
-                              onIonChange={e => setEmail(e.detail.value || '')}/>
                     <IonInput type="number" placeholder="Varsta" value={varsta}
                         // @ts-ignore
                               onIonChange={e => setVarsta(parseInt(e.detail.value) || 0)}/>

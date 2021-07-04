@@ -20,11 +20,13 @@ import {RouteComponentProps} from "react-router";
 
 interface PaginaAntrenorPropsExt extends PaginaAntrenorProps {
     onEdit: (id?: string) => void;
+    onExperienceEdit: (id?: string) => void;
+
 }
 
 
 
-const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, varsta, nota, descriere, poza,onEdit}) => {
+const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, varsta, nota, descriere, poza,onEdit,onExperienceEdit}) => {
     const [mQuery, setMQuery] = React.useState<any>({
         matches: window.innerWidth > 768 ? true : false,
     });
@@ -50,7 +52,7 @@ const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, v
                             <>
                                 <IonButton onClick={() => onEdit(id)}>Editeaza profilul </IonButton>
                                 <IonButton routerLink={"/page-2"}>Transformarile mele</IonButton>
-                                <IonButton routerLink={"/page-2"}>Experienta mea</IonButton>
+                                <IonButton onClick={() => onExperienceEdit(id)}>Experienta mea</IonButton>
 
                             </>
                         )}

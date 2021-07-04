@@ -12,12 +12,14 @@ const Sport: React.FC<SportPropsExt> = ({denumire,experienta}) => {
     return (
         <IonItem id={denumire}>
             <IonLabel>{denumire}</IonLabel>
+
             <IonInput
                 type="number"
                 // @ts-ignore
                 min={0}
+                value={experienta}
             >
-                {experienta}
+
             </IonInput>
         </IonItem>
     );

@@ -33,6 +33,8 @@ import Antrenor from "./pagina-antrenor/profilePage/PaginaAntrenor";
 import PaginaAntrenor from "./pagina-antrenor/profilePage/PaginaAntrenor";
 import EditareAntrenor from "./pagina-antrenor/editPage/EditareAntrenor";
 import {AntrenorProvider} from "./pagina-antrenor/profilePage/PaginaAntrenorProvider";
+import EditareExperienta from "./pagina-antrenor/experiencePage/EditareExperienta";
+import {ExperienceProvider} from "./pagina-antrenor/experiencePage/ExperiencePageProvider";
 
 const App: React.FC = () => (
     <IonApp>
@@ -52,6 +54,10 @@ const App: React.FC = () => (
                     <AntrenorProvider>
                         <Route path="/antrenor/:id" component={PaginaAntrenor} exact={true}/>
                         <Route path="/antrenor/edit/:id" component={EditareAntrenor} exact={true}/>
+                        <ExperienceProvider>
+                            <Route path="/antrenor/experience_edit/:id" component={EditareExperienta} exact={true}/>
+
+                        </ExperienceProvider>
 
                     </AntrenorProvider>
 
