@@ -35,6 +35,7 @@ import EditareAntrenor from "./pagina-antrenor/editPage/EditareAntrenor";
 import {AntrenorProvider} from "./pagina-antrenor/profilePage/PaginaAntrenorProvider";
 import EditareExperienta from "./pagina-antrenor/experiencePage/EditareExperienta";
 import {ExperienceProvider} from "./pagina-antrenor/experiencePage/ExperiencePageProvider";
+import Galerie from "./pagina-antrenor/paginaGalerie/Galerie";
 
 const App: React.FC = () => (
     <IonApp>
@@ -52,14 +53,15 @@ const App: React.FC = () => (
                         <Route path="/inregistrare_client" component={SignUpClient} exact={true}/>
                     </SignUpClientProvider>
                     <AntrenorProvider>
-                        <Route path="/antrenor/:id" component={PaginaAntrenor} exact={true}/>
-                        <Route path="/antrenor/edit/:id" component={EditareAntrenor} exact={true}/>
+                        <Route path="/antrenor" component={PaginaAntrenor} exact={true}/>
+                        <Route path="/antrenor/edit" component={EditareAntrenor} exact={true}/>
                         <ExperienceProvider>
-                            <Route path="/antrenor/experience_edit/:id" component={EditareExperienta} exact={true}/>
+                            <Route path="/antrenor/experience_edit" component={EditareExperienta} exact={true}/>
 
                         </ExperienceProvider>
 
                     </AntrenorProvider>
+                    <Route path="/gallery" component={Galerie} exact={true}/>
 
                     <Route exact path="/" render={() => <Redirect to="/login"/>}/>
                 </AuthProvider>

@@ -14,7 +14,8 @@ interface AntrenorPropsExt extends RouteComponentProps<{
 
 const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history, match}) => {
     const {antrenor, fetching, fetchingError} = useContext(AntrenorContext);
-    const routeId = match.params.id || '';
+    //@ts-ignore
+    const routeId = history.location.state.id
 
 
     const arr = antrenor?.filter(a => a.id == routeId)
@@ -27,18 +28,21 @@ const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history, match}) => {
                     <IonList>
                         {arr.map(({id, nume, prenume, email, varsta, nota, descriere, poza}) =>
                             <Antrenor key={id} id={id} nume={nume} prenume={prenume} email={email} varsta={varsta}
-                                      nota={nota} descriere={descriere} poza={poza} onEdit={(id) => history.push({
-                                pathname: `/antrenor/edit/${id}`,
-                                state: {id: id}
+                                      nota={nota} descriere={descriere} poza={poza}
+                                      onEdit={(id) => history.push({
+                                            pathname: `/antrenor/edit`,
+                                            state: {id: id}                                   })
+                                            }
+                                      onExperienceEdit={(id) => history.push({
+                                          pathname: `/antrenor/experience_edit`,
+                                          state: {id: id}                                  })
+                                      }
+                                    onGallery={(id) => history.push({
+                                            pathname: `/gallery`,
+                                            state: {id: id}
                             })
 
-                            }
-                                      onExperienceEdit={(id) => history.push({
-                                          pathname: `/antrenor/experience_edit/${id}`,
-                                          state: {id: id}
-                                      })
-
-                                      }/>)}
+                            }/>)}
                     </IonList>
                 )}
                 {fetchingError && (

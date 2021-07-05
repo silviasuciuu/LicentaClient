@@ -51,7 +51,9 @@ export const Login: React.FC<RouteComponentProps> = ({history}) => {
 
 
             if (tip == 'antrenor') {
-                history.push(`/antrenor/${id}`)
+                history.push({
+                    pathname: `/antrenor`,
+                    state: {id: id}                                   })
 
 
 

@@ -42,7 +42,8 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
 
 
     useEffect(() => {
-        const routeId = match.params.id || '';
+        //@ts-ignore
+        const routeId = history.location.state.id
         const antr = antrenor?.find(it => it.id == routeId.toString());
        // console.log(antr,'antrrr')
         setAntrenorr(antr);

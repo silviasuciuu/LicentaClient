@@ -26,7 +26,8 @@ interface EditarePropsExt extends RouteComponentProps<{
 
 const EditareExperienta: React.FC<EditarePropsExt> = ({history, match}) => {
     const {sports, fetching, fetchingError} = useContext(ExperienceContext);
-    const routeId = match.params.id || '';
+    //@ts-ignore
+    const routeId = history.location.state.id
 
     setId(Number(routeId))
     const handleAlegereSporturi = async () => {
