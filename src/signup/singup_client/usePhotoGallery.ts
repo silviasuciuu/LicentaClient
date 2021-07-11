@@ -1,8 +1,8 @@
-import { useCamera } from '@ionic/react-hooks/camera';
-import { CameraPhoto, CameraResultType, CameraSource, FilesystemDirectory } from '@capacitor/core';
-import { useEffect, useState } from 'react';
-import { base64FromPath, useFilesystem } from '@ionic/react-hooks/filesystem';
-import { useStorage } from '@ionic/react-hooks/storage';
+import {useCamera} from '@ionic/react-hooks/camera';
+import {CameraPhoto, CameraResultType, CameraSource, FilesystemDirectory} from '@capacitor/core';
+import {useEffect, useState} from 'react';
+import {base64FromPath, useFilesystem} from '@ionic/react-hooks/filesystem';
+import {useStorage} from '@ionic/react-hooks/storage';
 
 export interface Photo {
     filepath: string;
@@ -12,7 +12,7 @@ export interface Photo {
 const PHOTO_STORAGE = 'photos';
 
 export function usePhotoGallery() {
-    const { getPhoto } = useCamera();
+    const {getPhoto} = useCamera();
     const [photos, setPhotos] = useState<Photo[]>([]);
 
     const takePhoto = async () => {
@@ -23,14 +23,14 @@ export function usePhotoGallery() {
         });
         const fileName = new Date().getTime() + '.jpeg';
         const savedFileImage = await savePicture(cameraPhoto, fileName);
-        console.log("picture: "+JSON.stringify(savedFileImage));
+        console.log("picture: " + JSON.stringify(savedFileImage));
         const newPhotos = [savedFileImage, ...photos];
         setPhotos(newPhotos);
         set(PHOTO_STORAGE, JSON.stringify(newPhotos));
         return savedFileImage;
     };
 
-    const { deleteFile, readFile, writeFile } = useFilesystem();
+    const {deleteFile, readFile, writeFile} = useFilesystem();
     const savePicture = async (photo: CameraPhoto, fileName: string): Promise<Photo> => {
         const base64Data = await base64FromPath(photo.webPath!);
         await writeFile({
@@ -38,18 +38,19 @@ export function usePhotoGallery() {
             data: base64Data,
             directory: FilesystemDirectory.Data
         });
-
+        console.log(photo.webPath)
         return {
             filepath: fileName,
-            webviewPath: photo.webPath
+            webviewPath: base64Data
         };
     };
 
-    const { get, set } = useStorage();
+    const {get, set} = useStorage();
     useEffect(() => {
         const loadSaved = async () => {
             const photosString = await get(PHOTO_STORAGE);
             const photos = (photosString ? JSON.parse(photosString) : []) as Photo[];
+
             for (let photo of photos) {
                 const file = await readFile({
                     path: photo.filepath,
@@ -57,6 +58,7 @@ export function usePhotoGallery() {
                 });
                 photo.webviewPath = `data:image/jpeg;base64,${file.data}`;
             }
+
             setPhotos(photos);
         };
         loadSaved();

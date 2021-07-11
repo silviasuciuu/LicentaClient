@@ -20,7 +20,6 @@ import {Photo, usePhotoGallery} from "./usePhotoGallery";
 import {camera, trash, close} from "ionicons/icons";
 import {getClientByEmail, SignUpClientProps} from "./signUpClientApi";
 import {RouteComponentProps} from "react-router";
-import {getAntrenorByEmail} from "../signup_antrenor_first_page/signUpAntrenorApi";
 
 
 interface SignUpClientState {
@@ -80,12 +79,20 @@ const SignUpClient: React.FC<RouteComponentProps> = ({history}) => {
         let par1 = document.getElementById("p1").value
         // @ts-ignore
         let par2 = document.getElementById("p2").value
-        if (nume == '' || prenume == '' || email == '' || varsta == 0 || greutate == 0 || inaltime == 0 || sex == ''  || descriere == ''||photoPath=='')
+        if (nume == '' || prenume == '' || email == '' || varsta == 0 || greutate == 0 || inaltime == 0 || sex == '' || descriere == '' || photoPath == '')
             alert('Toate campurile sunt obligatorii')
         else {
             // @ts-ignore
+            console.log('bmi', document.getElementById('bmi').textContent, 'status', document.getElementById('status').textContent)
+            // @ts-ignore
+            const st = document.getElementById('status').textContent || ''
+            // @ts-ignore
+            const bmii = document.getElementById('bmi').textContent || ''
+
+
+            // @ts-ignore
             if (par1 == par2 && par1 != '' && parseInt(checkExist.data.length) == parseInt(0)) {
-                signUpClient?.(nume, prenume, email, parola, varsta, greutate, inaltime, sex, bmi, status, photoPath, descriere);
+                signUpClient?.(nume, prenume, email, parola, varsta, greutate, inaltime, sex, bmii, st, photoPath, descriere);
                 history.push({
                     pathname: '/login',
                 })
@@ -388,7 +395,7 @@ const SignUpClient: React.FC<RouteComponentProps> = ({history}) => {
                     onDidDismiss={() => setPhotoToDelete(undefined)}
                 />
 
-                <IonButton onClick={handleLSignUpClient}>Next</IonButton>
+                <IonButton onClick={handleLSignUpClient}>Salveaza</IonButton>
             </IonContent>
         </IonPage>
     );

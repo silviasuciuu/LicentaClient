@@ -36,6 +36,9 @@ import {AntrenorProvider} from "./pagina-antrenor/profilePage/PaginaAntrenorProv
 import EditareExperienta from "./pagina-antrenor/experiencePage/EditareExperienta";
 import {ExperienceProvider} from "./pagina-antrenor/experiencePage/ExperiencePageProvider";
 import Galerie from "./pagina-antrenor/paginaGalerie/Galerie";
+import {GalerieProvider} from "./pagina-antrenor/paginaGalerie/GalerieProvider";
+import {ClientProvider} from "./pagina-client/profilePage/PaginaClientProvider";
+import PaginaClient from "./pagina-client/profilePage/PaginaClient";
 
 const App: React.FC = () => (
     <IonApp>
@@ -57,12 +60,16 @@ const App: React.FC = () => (
                         <Route path="/antrenor/edit" component={EditareAntrenor} exact={true}/>
                         <ExperienceProvider>
                             <Route path="/antrenor/experience_edit" component={EditareExperienta} exact={true}/>
-
                         </ExperienceProvider>
-
+                        <GalerieProvider>
+                            <Route path="/galerie" component={Galerie} exact={true}/>
+                        </GalerieProvider>
                     </AntrenorProvider>
                     <Route path="/gallery" component={Galerie} exact={true}/>
+                    <ClientProvider>
+                        <Route path="/client" component={PaginaClient} exact={true}/>
 
+                    </ClientProvider>
                     <Route exact path="/" render={() => <Redirect to="/login"/>}/>
                 </AuthProvider>
             </IonRouterOutlet>

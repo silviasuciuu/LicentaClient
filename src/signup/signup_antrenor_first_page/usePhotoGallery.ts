@@ -33,7 +33,6 @@ export function usePhotoGallery() {
     const {deleteFile, readFile, writeFile} = useFilesystem();
     const savePicture = async (photo: CameraPhoto, fileName: string): Promise<Photo> => {
         const base64Data = await base64FromPath(photo.webPath!);
-        console.log(base64Data,'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
         await writeFile({
             path: fileName,
             data: base64Data,

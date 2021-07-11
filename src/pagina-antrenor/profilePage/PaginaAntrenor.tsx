@@ -14,6 +14,7 @@ interface AntrenorPropsExt extends RouteComponentProps<{
 
 const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history, match}) => {
     const {antrenor, fetching, fetchingError} = useContext(AntrenorContext);
+    try{
     //@ts-ignore
     const routeId = history.location.state.id
 
@@ -38,7 +39,7 @@ const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history, match}) => {
                                           state: {id: id}                                  })
                                       }
                                     onGallery={(id) => history.push({
-                                            pathname: `/gallery`,
+                                            pathname: `/galerie`,
                                             state: {id: id}
                             })
 
@@ -55,7 +56,12 @@ const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history, match}) => {
         ;
 
 
-};
+}
+catch (error)
+{
+    return (<IonLabel>Unauthorized</IonLabel>)
+}
+}
 
 
 export default PaginaAntrenor;
