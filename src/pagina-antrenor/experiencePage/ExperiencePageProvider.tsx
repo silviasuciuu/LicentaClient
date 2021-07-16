@@ -70,7 +70,6 @@ export const ExperienceProvider: React.FC<ExperienceProviderProps> = ({children}
         let canceled = false;
         let sportss = fetchExperiences();
 
-       // console.log(id,'iddddddddddd',JSON.stringify(sportss),'llllllllllllllll')
         return () => {
             canceled = true;
         }

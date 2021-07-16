@@ -6,7 +6,7 @@ import SignUpAntrenor from "./SignUpAntrenor";
 
 const log = getLogger('signUpAntrenorProvider');
 
-type SignUpAntrenorFn = (nume?: string,prenume?: string,email?: string, parola?: string,varsta?:number,descriere?:string,poza?:string) => void;
+type SignUpAntrenorFn = (nume?: string,prenume?: string,email?: string, parola?: string,varsta?:number,descriere?:string,poza?:string,numar_telefon?:string) => void;
 
 export interface AuthState {
     signUpAntrenorError: Error | null;
@@ -21,6 +21,7 @@ export interface AuthState {
     varsta?:number;
     descriere?:string;
     poza?:string;
+    numar_telefon?:string
 }
 
 const initialState: AuthState = {
@@ -48,7 +49,7 @@ export const SignUpAntrenorProvider: React.FC<AuthProviderProps> = ({ children }
         </SignUpAntrenorContext.Provider>
     );
 
-    function signUpAntrenorCallback(nume?: string,prenume?: string,email?: string, parola?: string,varsta?:number,descriere?:string,poza?:string): void {
+    function signUpAntrenorCallback(nume?: string,prenume?: string,email?: string, parola?: string,varsta?:number,descriere?:string,poza?:string,numar_telefon?:string): void {
         log('login');
         setState({
             ...state,
@@ -59,7 +60,8 @@ export const SignUpAntrenorProvider: React.FC<AuthProviderProps> = ({ children }
             parola,
             varsta,
             descriere,
-            poza
+            poza,
+            numar_telefon
         });
     }
 
@@ -79,8 +81,8 @@ export const SignUpAntrenorProvider: React.FC<AuthProviderProps> = ({ children }
                     ...state,
                     isSigningUpAntrenor: true,
                 });
-                const {nume,prenume,email, parola,varsta,descriere,poza } = state;
-                 await signUpAntrenorApi(nume,prenume,email, parola,varsta,descriere,poza );
+                const {nume,prenume,email, parola,varsta,descriere,poza ,numar_telefon} = state;
+                 await signUpAntrenorApi(nume,prenume,email, parola,varsta,descriere,poza,numar_telefon );
 
                 if (canceled) {
                     return;

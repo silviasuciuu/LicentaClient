@@ -27,7 +27,7 @@ interface PaginaAntrenorPropsExt extends PaginaAntrenorProps {
 
 
 
-const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, varsta, nota, descriere, poza,onEdit,onExperienceEdit,onGallery}) => {
+const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, varsta, nota, descriere, poza,numar_telefon,onEdit,onExperienceEdit,onGallery}) => {
     const [mQuery, setMQuery] = React.useState<any>({
         matches: window.innerWidth > 768 ? true : false,
     });
@@ -64,6 +64,8 @@ const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, v
                                                                      src={poza}/></IonLabel></IonRow>
             <IonRow class={"antrenorProfilePage"}><h1><IonLabel>{nume} {prenume}</IonLabel></h1></IonRow>
             <IonRow class={"antrenorProfilePageEmail"}><h1><IonLabel>{email}</IonLabel></h1></IonRow>
+            <IonRow class={"antrenorProfilePageEmail"}><h1><IonLabel>{numar_telefon}</IonLabel></h1></IonRow>
+
             <IonRow class={"antrenorProfilePageEmail"}><h1><IonLabel class={"spatiuAntrenor"}>{varsta} ani</IonLabel>
             </h1>
                 <h1> Nota <IonLabel>{nota}</IonLabel></h1></IonRow>

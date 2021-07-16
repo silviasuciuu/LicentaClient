@@ -35,7 +35,6 @@ const EditareExperienta: React.FC<EditarePropsExt> = ({history, match}) => {
         const handleAlegereSporturi = async () => {
             const routeId = match.params.id || '';
             const sports = await getExperienta(Number(routeId));
-            console.log(sports + 'ssssssss')
             // @ts-ignore
 
             const antr = match.params.id || '';

@@ -27,9 +27,9 @@ const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history, match}) => {
                 <IonLoading isOpen={fetching} message="Fetching antrenor"/>
                 {arr && (
                     <IonList>
-                        {arr.map(({id, nume, prenume, email, varsta, nota, descriere, poza}) =>
+                        {arr.map(({id, nume, prenume, email, varsta, nota, descriere, poza,numar_telefon}) =>
                             <Antrenor key={id} id={id} nume={nume} prenume={prenume} email={email} varsta={varsta}
-                                      nota={nota} descriere={descriere} poza={poza}
+                                      nota={nota} descriere={descriere} poza={poza} numar_telefon={numar_telefon}
                                       onEdit={(id) => history.push({
                                             pathname: `/antrenor/edit`,
                                             state: {id: id}                                   })

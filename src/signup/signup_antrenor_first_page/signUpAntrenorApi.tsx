@@ -14,12 +14,13 @@ export interface SignUpAntrenorProps {
     varsta: number,
     descriere: string,
     poza: string,
+    numar_telefon:string
 
 }
 
-export const signUpAntrenor: (nume?: string, prenume?: string, email?: string, parola?: string, varsta?: number, descriere?: string, poza?: string) => Promise<SignUpAntrenorProps> = (nume, prenume, email, parola, varsta, descriere, poza) => {
+export const signUpAntrenor: (nume?: string, prenume?: string, email?: string, parola?: string, varsta?: number, descriere?: string, poza?: string,numar_telefon?:string) => Promise<SignUpAntrenorProps> = (nume, prenume, email, parola, varsta, descriere, poza,numar_telefon) => {
 
-
+console.log(numar_telefon,'nr telfffffffffffffff')
     return withLogs(axios.post(signupAntrenorUrl+'/create', {
         nume,
         prenume,
@@ -27,7 +28,8 @@ export const signUpAntrenor: (nume?: string, prenume?: string, email?: string, p
         parola,
         varsta,
         descriere,
-        poza
+        poza,
+        'numar_telefon':numar_telefon
     }, config), 'signUpAntrenor');
 }
 export const getAntrenorByEmail: (email: string | undefined) => Promise<SignUpAntrenorProps[]> = email => {

@@ -4,8 +4,11 @@ import PropTypes from 'prop-types';
 import {log} from "util";
 import {PaginaClientProps} from "./PaginaClientProps";
 import {getClienti} from "./PaginaClientApi";
+import {PaginaEditClientProps} from "../editPage/PaginaEditClientProps";
+import {updateClient} from "../editPage/EditClientApi";
+import {getClientByIdd} from "../evolutionPage/EvolutieApi";
 
-type SaveClientFn = (client: PaginaClientProps) => Promise<any>;
+type SaveClientFn = (client: PaginaEditClientProps) => Promise<any>;
 
 
 export interface ClientState {
@@ -117,13 +120,15 @@ export const ClientProvider: React.FC<ClientProviderProps> = ({children}) => {
         }
     }
 
-    async function saveClientCallback(client: PaginaClientProps) {
+    async function saveClientCallback(client: PaginaEditClientProps) {
+
         log('saveCLIENT started');
         dispatch({type: SAVE_CLIENT_STARTED});
-       /* const savedClient = await updateClient( client);
+       const savedClient = await updateClient( client);
         log('saveClient succeeded');
-        dispatch({type: SAVE_CLIENT_SUCCEEDED, payload: {client: savedClient}});*/
+        dispatch({type: SAVE_CLIENT_SUCCEEDED, payload: {client: savedClient}});
     }
+
 
 
 };

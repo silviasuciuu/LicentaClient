@@ -30,6 +30,7 @@ interface SignUpAntrenorState {
     varsta?: number;
     descriere?: string;
     poza?: string;
+    numar_telefon?:string;
 }
 
 const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
@@ -38,7 +39,7 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
     const [state, setState] = useState<SignUpAntrenorState>({});
     const [photoPath, setPhotoPath] = useState('');
     const {photos, takePhoto, deletePhoto} = usePhotoGallery();
-    const {nume, prenume, email, parola, varsta, descriere, poza} = state;
+    const {nume, prenume, email, parola, varsta, descriere, poza,numar_telefon} = state;
     const [confirma_parola, setConfirma_parola] = useState<string>();
     const [photoToDelete, setPhotoToDelete] = useState<Photo>();
     const handleLSignUpAntrenor = async () => {
@@ -52,7 +53,7 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
         else{
         // @ts-ignore
         if (par1 == par2 && par1 != '' && parseInt(checkExist.data.length)==parseInt(0)) {
-            signUpAntrenor?.(nume, prenume, email, parola, varsta, descriere, photoPath);
+            signUpAntrenor?.(nume, prenume, email, parola, varsta, descriere, photoPath,numar_telefon);
             history.push({
                 pathname: 'inregistrare_antrenor/sporturi',
                 state: {detail: email,photo:photoPath}
@@ -161,6 +162,30 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
                         </IonItem>
                     </IonCol>
                 </IonRow>
+
+
+
+
+                <IonRow>
+                    <IonCol>
+                        <IonItem>
+                            <IonLabel position="floating"> Numar telefon</IonLabel>
+                            <IonInput
+                                value={numar_telefon}
+                                // @ts-ignore
+                                min={0}
+                                onIonChange={e => setState({
+                                    ...state,
+                                    //@ts-ignore
+                                    numar_telefon: e.detail.value || ''
+                                })}
+                            >
+                            </IonInput>
+                        </IonItem>
+                    </IonCol>
+                </IonRow>
+
+
                 <IonRow>
                     <IonCol>
                         <IonItem>

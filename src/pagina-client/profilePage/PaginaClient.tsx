@@ -28,14 +28,17 @@ const PaginaClient: React.FC<ClientPropsExt> = ({history, match}) => {
                                         greutate={greutate}
                                         inaltime={inaltime} sex={sex} bmi={bmi} status={status}
                                         descriere={descriere} poza={poza}
-
                                         onEdit={(id) => history.push({
                                             pathname: `/client/edit`,
                                             state: {id: id}
                                         })
                                         }
 
-                                />)}
+                                        onEvolution={(id) => history.push({
+                                            pathname: `/evolution`,
+                                            state: {id: id}
+                                        })
+                                        }/>)}
                         </IonList>
                     )}
                     {fetchingError && (

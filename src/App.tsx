@@ -39,6 +39,9 @@ import Galerie from "./pagina-antrenor/paginaGalerie/Galerie";
 import {GalerieProvider} from "./pagina-antrenor/paginaGalerie/GalerieProvider";
 import {ClientProvider} from "./pagina-client/profilePage/PaginaClientProvider";
 import PaginaClient from "./pagina-client/profilePage/PaginaClient";
+import Evolutie from "./pagina-client/evolutionPage/Evolutie";
+import {EvolutieProvider} from "./pagina-client/evolutionPage/EvolutieProvider";
+import EditareClient from "./pagina-client/editPage/EditareClient";
 
 const App: React.FC = () => (
     <IonApp>
@@ -68,8 +71,13 @@ const App: React.FC = () => (
                     <Route path="/gallery" component={Galerie} exact={true}/>
                     <ClientProvider>
                         <Route path="/client" component={PaginaClient} exact={true}/>
+                        <Route path="/client/edit" component={EditareClient} exact={true}/>
 
                     </ClientProvider>
+                    <EvolutieProvider>
+                        <Route path="/evolution" component={Evolutie} exact={true}/>
+
+                    </EvolutieProvider>
                     <Route exact path="/" render={() => <Redirect to="/login"/>}/>
                 </AuthProvider>
             </IonRouterOutlet>

@@ -9,5 +9,6 @@ export interface PaginaAntrenorProps {
     nota?: number,
     descriere: string,
     poza: string,
+    numar_telefon:string
 
 }

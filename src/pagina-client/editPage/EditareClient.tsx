@@ -10,33 +10,37 @@ import {
     IonPage, IonRadio, IonRadioGroup,
     IonTitle,
     IonToolbar,
-    IonImg, IonTextarea, IonList
+    IonImg, IonTextarea, IonList, IonSelect, IonSelectOption
 } from '@ionic/react';
-import {AntrenorContext} from '../profilePage/PaginaAntrenorProvider';
 import {RouteComponentProps} from 'react-router';
 
 import {camera, close, trash} from "ionicons/icons";
 import {Photo, usePhotoGallery} from "./usePhotoGallery";
-import {PaginaAntrenorProps} from "../profilePage/PaginaAntrenorProps";
-import Antrenor from "../profilePage/Antrenor";
+import {ClientContext} from "../profilePage";
+import {PaginaEditClientProps} from "./PaginaEditClientProps";
+import {getClientByIdd} from "../evolutionPage/EvolutieApi";
 
 
-interface AntrenorEditProps extends RouteComponentProps<{
+
+interface ClientEditProps extends RouteComponentProps<{
     id?: string;
 }> {
 }
 
-const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
-    const {antrenor, saving, savingError, saveAntrenor} = useContext(AntrenorContext);
+const EditareClient: React.FC<ClientEditProps> = ({history, match}) => {
+    const {client, saving, savingError, saveClient} = useContext(ClientContext);
     const [nume, setNume] = useState('');
     const [prenume, setPrenume] = useState('');
-    const [email, setEmail] = useState('');
     const [varsta, setVarsta] = useState(0);
     const [descriere, setDescriere] = useState('');
     const [poza, setPoza] = useState('');
-    const [numar_telefon, setNumar_telefon] = useState('');
+    const [inaltime, setInaltime] = useState(0);
+    const [sex, setSex] = useState('');
+    const [bmi, setBmi] = useState(0);
+    var [status, setStatus] = useState('');
 
-    const [antrenorr, setAntrenorr] = useState<PaginaAntrenorProps>();
+
+    const [clientr, setClientr] = useState<PaginaEditClientProps>();
     const {photos, takePhoto, deletePhoto} = usePhotoGallery();
     const [photoToDelete, setPhotoToDelete] = useState<Photo>();
 
@@ -45,45 +49,69 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
     useEffect(() => {
         //@ts-ignore
         const routeId = history.location.state.id
-        const antr = antrenor?.find(it => it.id == routeId.toString());
-        setAntrenorr(antr);
+        const antr = client?.find(it => it.id == routeId.toString());
+        setClientr(antr);
         if (antr) {
             setNume(antr.nume);
             setPrenume(antr.prenume);
-            setEmail(antr.email);
             setVarsta(antr.varsta);
             setDescriere(antr.descriere);
             setPoza(antr.poza);
+            setBmi(antr.bmi);
+            setInaltime(antr.inaltime)
+            setStatus(antr.status)
+            setSex(antr.sex)
 
         }
-    }, [match.params.id, antrenor]);
+    }, [match.params.id, client]);
 
 
-
-    const handleSave = () => {
-        console.log(antrenorr)
-        const editedAntrenor = antrenorr
+    const handleSave = async () => {
+        console.log(clientr)
+        const editedClient = clientr
             ? {
-                ...antrenorr,
+                ...clientr,
                 nume,
                 prenume,
-                email,
                 varsta,
+                inaltime,
+                sex,
+                bmi,
+                status,
                 descriere,
                 poza,
-                numar_telefon
             }
             : {
                 nume,
                 prenume,
-                email,
                 varsta,
+                inaltime,
+                sex,
+                bmi,
+                status,
                 descriere,
                 poza,
-                numar_telefon
 
             };
-        saveAntrenor && saveAntrenor(editedAntrenor).then(() => {
+
+        // @ts-ignore
+        var greutatee=  await getClientByIdd(history.location.state.id)
+        var greutate=greutatee[0].greutate
+        //@ts-ignore
+        let bmiCalc = greutate / (inaltime * inaltime) * 10000
+        if (bmiCalc == NaN)
+            bmiCalc = 0
+        if (bmiCalc < 18.5)
+            status = 'Subponderal'
+        if (bmiCalc <= 24.9 && bmiCalc >= 18.5)
+            status = 'Normal'
+        if (bmiCalc >= 25 && bmiCalc <= 29.9)
+            status = 'Supraponderal'
+        if (bmiCalc >= 30)
+            status = 'Obez'
+        editedClient.status=status
+        editedClient.bmi=bmiCalc
+        saveClient && saveClient(editedClient).then(() => {
             history.goBack();
         })
     };
@@ -112,7 +140,18 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
                     <IonInput type="number" placeholder="Varsta" value={varsta}
                         // @ts-ignore
                               onIonChange={e => setVarsta(parseInt(e.detail.value) || 0)}/>
+                    <IonInput type="number" placeholder="Inaltime" value={inaltime}
+                        // @ts-ignore
+                              onIonChange={e => setInaltime(parseInt(e.detail.value) || 0)}/>
+                    <IonLabel position="floating"> Sex</IonLabel>
+                    <IonSelect onIonChange={e => setSex(e.detail.value || '')}>
+                        <IonSelectOption value="m">m</IonSelectOption>
+                        <IonSelectOption value="f">f</IonSelectOption>
+                    </IonSelect>
+
                     <IonTextarea value={descriere} placeholder="Descriere" onIonChange={e => setDescriere(e.detail.value || '')}>
+
+
 
                     </IonTextarea>
 
@@ -171,4 +210,4 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
     );
 };
 
-export default EditareAntrenor;
+export default EditareClient;

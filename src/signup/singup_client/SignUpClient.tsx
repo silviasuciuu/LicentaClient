@@ -49,7 +49,6 @@ const SignUpClient: React.FC<RouteComponentProps> = ({history}) => {
     const [photoToDelete, setPhotoToDelete] = useState<Photo>();
 
     const changeDatas = () => {
-        console.log(nume, prenume, email, parola, varsta, greutate, inaltime, sex, bmi, status, photoPath, descriere)
         // @ts-ignore
         let bmiCalc = greutate / (inaltime * inaltime) * 10000
         if (bmiCalc == NaN)
