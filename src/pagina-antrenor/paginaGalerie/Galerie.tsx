@@ -59,7 +59,7 @@ history.goBack()
                 <IonGrid>
                     <IonRow>
                         {photos.map((photo, index) => (
-                            <IonCol size="6" key={index}>
+                            <IonCol size="3" key={index}>
                                 <IonImg onClick={() => setPhotoToDelete(photo)}
                                         src={photo.webviewPath}/>
                             </IonCol>

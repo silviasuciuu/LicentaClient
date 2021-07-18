@@ -14,53 +14,61 @@ interface AntrenorPropsExt extends RouteComponentProps<{
 
 const PaginaAntrenor: React.FC<AntrenorPropsExt> = ({history, match}) => {
     const {antrenor, fetching, fetchingError} = useContext(AntrenorContext);
-    try{
-    //@ts-ignore
-    const routeId = history.location.state.id
+    try {
+        //@ts-ignore
+        const routeId = history.location.state.id
 
 
-    const arr = antrenor?.filter(a => a.id == routeId)
+        const arr = antrenor?.filter(a => a.id == routeId)
 
-    return (
-        <IonPage>
-            <IonContent>
-                <IonLoading isOpen={fetching} message="Fetching antrenor"/>
-                {arr && (
-                    <IonList>
-                        {arr.map(({id, nume, prenume, email, varsta, nota, descriere, poza,numar_telefon}) =>
-                            <Antrenor key={id} id={id} nume={nume} prenume={prenume} email={email} varsta={varsta}
-                                      nota={nota} descriere={descriere} poza={poza} numar_telefon={numar_telefon}
-                                      onEdit={(id) => history.push({
-                                            pathname: `/antrenor/edit`,
-                                            state: {id: id}                                   })
-                                            }
-                                      onExperienceEdit={(id) => history.push({
-                                          pathname: `/antrenor/experience_edit`,
-                                          state: {id: id}                                  })
-                                      }
-                                    onGallery={(id) => history.push({
-                                            pathname: `/galerie`,
-                                            state: {id: id}
-                            })
+        return (
+            <IonPage>
+                <IonContent>
+                    <IonLoading isOpen={fetching} message="Fetching antrenor"/>
+                    {arr && (
+                        <IonList>
+                            {arr.map(({id, nume, prenume, email, varsta, nota, descriere, poza, numar_telefon}) =>
+                                <Antrenor key={id} id={id} nume={nume} prenume={prenume} email={email} varsta={varsta}
+                                          nota={nota} descriere={descriere} poza={poza} numar_telefon={numar_telefon}
+                                          onEdit={(id) => history.push({
+                                              pathname: `/antrenor/edit`,
+                                              state: {id: id}
+                                          })
+                                          }
+                                          onExperienceEdit={(id) => history.push({
+                                              pathname: `/antrenor/experience_edit`,
+                                              state: {id: id}
+                                          })
+                                          }
+                                          onGallery={(id) => history.push({
+                                              pathname: `/galerie`,
+                                              state: {id: id}
+                                          })
 
-                            }/>)}
-                    </IonList>
-                )}
-                {fetchingError && (
-                    <div>{fetchingError.message || 'Failed to fetch '}</div>
-                )}
-            </IonContent>
-        </IonPage>
+                                          }
+                                          onLogOut={() => history.push({
+                                              pathname: `/login`,
+                                          })
 
-    )
-        ;
+                                          }
 
 
-}
-catch (error)
-{
-    return (<IonLabel>Unauthorized</IonLabel>)
-}
+                                />)}
+                        </IonList>
+                    )}
+                    {fetchingError && (
+                        <div>{fetchingError.message || 'Failed to fetch '}</div>
+                    )}
+                </IonContent>
+            </IonPage>
+
+        )
+            ;
+
+
+    } catch (error) {
+        return (<IonLabel>Unauthorized</IonLabel>)
+    }
 }
 
 

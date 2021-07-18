@@ -37,10 +37,6 @@ const EditareExperienta: React.FC<EditarePropsExt> = ({history, match}) => {
             const sports = await getExperienta(Number(routeId));
             // @ts-ignore
 
-            const antr = match.params.id || '';
-            // @ts-ignore
-
-            console.log(document.getElementsByClassName("native-input sc-ion-input-md")[0].value + "eelllll")
             var exper = document.getElementsByClassName("native-input sc-ion-input-md")
 
             for (let i = 0; i < exper.length; i++) {

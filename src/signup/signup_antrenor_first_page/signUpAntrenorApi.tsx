@@ -7,6 +7,7 @@ const signupAntrenorUrl = `http://${baseUrl}/signup-antrenor`;
 
 
 export interface SignUpAntrenorProps {
+    id?:number ;
     nume: string,
     prenume: string,
     email: string,
@@ -20,7 +21,6 @@ export interface SignUpAntrenorProps {
 
 export const signUpAntrenor: (nume?: string, prenume?: string, email?: string, parola?: string, varsta?: number, descriere?: string, poza?: string,numar_telefon?:string) => Promise<SignUpAntrenorProps> = (nume, prenume, email, parola, varsta, descriere, poza,numar_telefon) => {
 
-console.log(numar_telefon,'nr telfffffffffffffff')
     return withLogs(axios.post(signupAntrenorUrl+'/create', {
         nume,
         prenume,

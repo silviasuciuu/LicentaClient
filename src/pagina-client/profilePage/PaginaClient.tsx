@@ -20,7 +20,7 @@ const PaginaClient: React.FC<ClientPropsExt> = ({history, match}) => {
         return (
             <IonPage>
                 <IonContent>
-                    <IonLoading isOpen={fetching} message="Fetching cleint"/>
+                    <IonLoading isOpen={fetching} message="Fetching client"/>
                     {arr && (
                         <IonList>
                             {arr.map(({id, nume, prenume, email, varsta, greutate, inaltime, sex, bmi, status, poza, descriere}) =>

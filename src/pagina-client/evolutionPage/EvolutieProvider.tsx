@@ -94,7 +94,7 @@ export const EvolutieProvider: React.FC<EvolutieProviderProps> = ({children}) =>
     async function saveGreutateCallback(id_client: number, greutate: number, data: string) {
         try {
             dispatch({type: SAVE_GREUTATE_STARTED});
-            const savedItem = await salveazaGreutate(id_client, greutate, data)
+            const savedItem = await salveazaGreutate(id_client.toString(), greutate, data)
             dispatch({type: SAVE_GREUTATE_SUCCEEDED, payload: {item: savedItem}});
         } catch (error) {
             dispatch({type: SAVE_GREUTATE_FAILED, payload: {error}});

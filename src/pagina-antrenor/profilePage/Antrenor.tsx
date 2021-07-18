@@ -21,13 +21,14 @@ interface PaginaAntrenorPropsExt extends PaginaAntrenorProps {
     onEdit: (id?: string) => void;
     onExperienceEdit: (id?: string) => void;
     onGallery: (id?: string) => void;
+    onLogOut: () => void;
 
 
 }
 
 
 
-const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, varsta, nota, descriere, poza,numar_telefon,onEdit,onExperienceEdit,onGallery}) => {
+const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, varsta, nota, descriere, poza,numar_telefon,onEdit,onExperienceEdit,onGallery,onLogOut}) => {
     const [mQuery, setMQuery] = React.useState<any>({
         matches: window.innerWidth > 768 ? true : false,
     });
@@ -51,9 +52,12 @@ const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, v
                             <IonMenuButton/>
                         ) : (
                             <>
+
                                 <IonButton onClick={() => onEdit(id)}>Editeaza profilul </IonButton>
                                 <IonButton onClick={() => onGallery(id)}>Galerie foto</IonButton>
                                 <IonButton onClick={() => onExperienceEdit(id)}>Experienta mea</IonButton>
+                                <IonButton onClick={() => onLogOut()}>LogOut</IonButton>
+
 
                             </>
                         )}
@@ -68,7 +72,7 @@ const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, v
 
             <IonRow class={"antrenorProfilePageEmail"}><h1><IonLabel class={"spatiuAntrenor"}>{varsta} ani</IonLabel>
             </h1>
-                <h1> Nota <IonLabel>{nota}</IonLabel></h1></IonRow>
+            </IonRow>
             <IonRow class={"antrenorProfilePageDescriere"}><h1><IonTextarea>{descriere}</IonTextarea></h1></IonRow>
 
         </IonList>

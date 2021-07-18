@@ -69,7 +69,7 @@ export const Login: React.FC<RouteComponentProps> = ({history}) => {
     };
 
     function check() {
-        if (parola == '' || email == '' || tip == '') {
+        if (parola == '' || email == '' || tip === undefined) {
             alert('Completati toate campurile')
             return 'wrong'
         }

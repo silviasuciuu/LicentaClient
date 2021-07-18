@@ -1,8 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import {getLogger} from '../../core';
-import {signUpClient as signUpClientApi} from './signUpClientApi';
+import {getClientByEmail, signUpClient as signUpClientApi} from './signUpClientApi';
 import SignUpClient from "./SignUpClient";
+import {getClientByIdd, salveazaGreutate} from "../../pagina-client/evolutionPage/EvolutieApi";
 
 const log = getLogger('signUpClientProvider');
 
@@ -89,8 +90,20 @@ export const SignUpClientProvider: React.FC<AuthProviderProps> = ({children}) =>
                     ...state,
                     isSigningUpClient: true,
                 });
-                const {nume, prenume,email, parola, varsta, greutate, inaltime, sex, bmi, status, poza, descriere} = state;
-                await signUpClientApi(nume, prenume,email, parola, varsta, greutate, inaltime, sex, bmi, status, poza, descriere);
+
+                const {nume, prenume, email, parola, varsta, greutate, inaltime, sex, bmi, status, poza, descriere} = state;
+                await signUpClientApi(nume, prenume, email, parola, varsta, greutate, inaltime, sex, bmi, status, poza, descriere);
+                let idC = await getClientByEmail(email);
+                // @ts-ignore
+                const idF= JSON.stringify(idC['data'][0].id)
+                var today: Date = new Date();
+                var dd = String(today.getDate()).padStart(2, '0');
+                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var yyyy = today.getFullYear();
+
+
+                salveazaGreutate(idF, greutate, yyyy + '-' + mm + '-' + dd)
+
 
                 if (canceled) {
                     return;

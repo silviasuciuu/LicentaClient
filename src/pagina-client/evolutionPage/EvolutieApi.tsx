@@ -26,7 +26,8 @@ export const getGreutatiById: (id: number) => Promise<PaginaEvolutieProps[]> = i
 
 }
 
-export const salveazaGreutate: (id_client: number, greutate: number, data: string) => Promise<PaginaEvolutieProps[]> = (id_client, greutate, data) => {
+export const salveazaGreutate: (id_client: string, greutate: number | undefined, data: string) => Promise<PaginaEvolutieProps[]> = (id_client, greutate, data) => {
+    console.log(id_client+" " +greutate+data+"/////////////////////////////")
     return withLogs(axios.post(paginaEvolutieUrl + '/create', {
         'id_client': id_client,
         'greutate':greutate,

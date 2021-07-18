@@ -169,7 +169,7 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
                 <IonRow>
                     <IonCol>
                         <IonItem>
-                            <IonLabel position="floating"> Numar telefon</IonLabel>
+                            <IonLabel position="floating"> Numar telefon(Whatsapp)</IonLabel>
                             <IonInput
                                 value={numar_telefon}
                                 // @ts-ignore
