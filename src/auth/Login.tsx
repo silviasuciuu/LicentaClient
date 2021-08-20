@@ -22,12 +22,13 @@ import {
     IonRadio,
     IonItem,
     IonCheckbox,
-    IonRadioGroup
+    IonRadioGroup, IonImg
 } from '@ionic/react';
 import {AuthContext} from './AuthProvider';
 import {getLogger} from '../core';
 import {personCircle} from "ionicons/icons";
 import {loginFct, loginGetId} from "./authApi";
+import {logo} from "./logo";
 const log = getLogger('Login');
 
 interface LoginState {
@@ -96,16 +97,21 @@ export const Login: React.FC<RouteComponentProps> = ({history}) => {
     return (
         <IonPage>
             <IonHeader>
+
                 <IonToolbar>
-                    <IonTitle>Login</IonTitle>
+                    <IonTitle class="centered">Fit At Home</IonTitle>
+
                 </IonToolbar>
             </IonHeader>
+            <IonLabel style={{ fontSize: "40px", color: "#318ce7"}} >Login</IonLabel><br/>
+
             <IonRow class="fields">
                 <IonCol>
                     <IonIcon
-                        style={{fontSize: "70px", color: "#0040ff"}}
+                        style={{fontSize: "70px", color: "#318ce7"}}
                         icon={personCircle}
                     />
+
                 </IonCol>
             </IonRow>
 

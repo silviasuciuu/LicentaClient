@@ -1,5 +1,16 @@
 import React, {useContext, useState} from 'react';
-import {IonItem, IonLabel, IonButton, IonList, IonContent, IonPage, IonLoading, IonImg, IonFab} from '@ionic/react';
+import {
+    IonItem,
+    IonLabel,
+    IonButton,
+    IonList,
+    IonContent,
+    IonPage,
+    IonLoading,
+    IonImg,
+    IonFab,
+    IonHeader, IonToolbar, IonTitle
+} from '@ionic/react';
 
 import {RouteComponentProps, useHistory, withRouter} from "react-router";
 import Client from "./Client";
@@ -18,8 +29,18 @@ const PaginaClient: React.FC<ClientPropsExt> = ({history, match}) => {
         const arr = client?.filter(a => a.id == routeId)
 
         return (
-            <IonPage>
-                <IonContent>
+            <IonPage >
+
+                    <IonHeader>
+
+                        <IonToolbar>
+                            <IonTitle class="centered">Fit At Home</IonTitle>
+                            <IonTitle class="subtitle">Profilul meu</IonTitle>
+
+                        </IonToolbar>
+                    </IonHeader>
+
+                <IonContent >
                     <IonLoading isOpen={fetching} message="Fetching client"/>
                     {arr && (
                         <IonList>
@@ -38,7 +59,24 @@ const PaginaClient: React.FC<ClientPropsExt> = ({history, match}) => {
                                             pathname: `/evolution`,
                                             state: {id: id}
                                         })
-                                        }/>)}
+                                        }
+
+
+                                        onRecomandations={(id) => history.push({
+                                            pathname: `/recomandations`,
+                                            state: {id: id}
+                                        })
+                                        }
+
+
+
+                                        onLogOut={() => history.push({
+                                            pathname: `/login`,
+                                        })
+                                        }
+
+
+                                />)}
                         </IonList>
                     )}
                     {fetchingError && (

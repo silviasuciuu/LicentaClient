@@ -11,6 +11,7 @@ const paginaAntrenorUrl = `http://${baseUrl}/antrenor`;
 
 
 export const getAntrenorById: (id: string ) => Promise<PaginaAntrenorProps[]> = id => {
+    console.log(id)
     return withLogs(axios.get(paginaAntrenorUrl+'/id', {
         headers: {
             'id': "'"+id+"'",
@@ -20,6 +21,26 @@ export const getAntrenorById: (id: string ) => Promise<PaginaAntrenorProps[]> = 
 
 }
 
+export const getAntrenorByIdd: (id: string ) => Promise<PaginaAntrenorProps[]> = id => {
+    console.log(id)
+    return withLogs(axios.get(paginaAntrenorUrl+'/id', {
+        headers: {
+            'id':id,
+            'Content-Type': 'application/json'
+        }
+    }), 'getAntrenor');
+
+}
+export const getAntrenorByIddd: (id: string ) => Promise<PaginaAntrenorProps> = id => {
+    console.log(id)
+    return withLogs(axios.get(paginaAntrenorUrl+'/id', {
+        headers: {
+            'id':id,
+            'Content-Type': 'application/json'
+        }
+    }), 'getAntrenor');
+
+}
 
 
 

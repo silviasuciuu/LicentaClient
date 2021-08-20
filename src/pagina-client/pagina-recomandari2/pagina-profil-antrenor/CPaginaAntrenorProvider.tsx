@@ -2,11 +2,11 @@ import React, {useCallback, useContext, useEffect, useReducer} from 'react';
 import PropTypes from 'prop-types';
 
 import {log} from "util";
-import {PaginaAntrenorProps} from "./PaginaAntrenorProps";
-import {getAntrenorById, getAntrenori} from "./PaginaAntrenorApi";
-import {AuthContext} from "../../auth";
-import {updateAntrenor} from "../editPage/EditAntrenorApi";
-import {AuthProps} from "../../auth/authApi";
+import {PaginaAntrenorProps} from "../../../pagina-antrenor/profilePage/PaginaAntrenorProps";
+import {getAntrenorById, getAntrenori} from "../../../pagina-antrenor/profilePage/PaginaAntrenorApi";
+
+import {updateAntrenor} from "../../../pagina-antrenor/editPage/EditAntrenorApi";
+
 
 type SaveAntrenorFn = (antrenor: PaginaAntrenorProps) => Promise<any>;
 
@@ -80,7 +80,7 @@ interface AntrenorProviderProps {
 
 
 
-export const AntrenorProvider: React.FC<AntrenorProviderProps> = ({children}) => {
+export const CAntrenorProvider: React.FC<AntrenorProviderProps> = ({children}) => {
 
     const [state, dispatch] = useReducer(antrenorreducer, initialStateAntrenor);
     const {

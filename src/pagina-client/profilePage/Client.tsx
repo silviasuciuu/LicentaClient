@@ -20,12 +20,14 @@ import {PaginaClientProps} from "./PaginaClientProps";
 interface PaginaClientPropsExt extends PaginaClientProps {
     onEdit: (id?: string) => void;
     onEvolution: (id?: string) => void;
+    onRecomandations: (id?: string) => void;
+    onLogOut: () => void;
 
 
 }
 
 
-const Client: React.FC<PaginaClientPropsExt> = ({id, nume, prenume, email, varsta, greutate, inaltime, sex, bmi, status, poza, descriere, onEdit, onEvolution}) => {
+const Client: React.FC<PaginaClientPropsExt> = ({id, nume, prenume, email, varsta, greutate, inaltime, sex, bmi, status, poza, descriere, onEdit, onEvolution,onRecomandations,onLogOut}) => {
     const [mQuery, setMQuery] = React.useState<any>({
         matches: window.innerWidth > 768 ? true : false,
     });
@@ -42,25 +44,29 @@ const Client: React.FC<PaginaClientPropsExt> = ({id, nume, prenume, email, varst
     return (
         <IonList>
             <IonToolbar>
-                <IonTitle>Profilul meu</IonTitle>
                 <IonButtons slot="end">
                     <div>
                         {mQuery && !mQuery.matches ? (
                             <IonMenuButton/>
                         ) : (
                             <>
-                                <IonButton onClick={() => onEdit(id)}>Editeaza profilul </IonButton>
-                                <IonButton onClick={() => onEvolution(id)}>Evolutia mea/Adauga greutate </IonButton>
-                                <IonButton onClick={() => onEdit(id)}>Recomandari antrenori</IonButton>
+                                <IonButton class={"buttons"} onClick={() => onEdit(id)}>Editeaza profilul </IonButton>
+                                <IonButton class={"buttons"} onClick={() => onEvolution(id)}>Evolutia mea/Adauga greutate </IonButton>
+                                <IonButton class={"buttons"} onClick={() => onRecomandations(id)}>Recomandari antrenori</IonButton>
+                                <IonButton class={"buttons"} onClick={() => onLogOut()}>LogOut</IonButton>
+
 
                             </>
                         )}
                     </div>
                 </IonButtons>
             </IonToolbar>
-            <IonRow class={"antrenorProfilePage"}> <IonLabel><IonImg style={{width: "100px"}} alt={"No Photo"}
+
+            <div className={"box"}>
+
+            <IonRow class={"profilePicture"}> <IonLabel><IonImg  style={{ width: "150px"}} alt={"No Photo"}
                                                                      src={poza}/></IonLabel></IonRow>
-            <IonRow class={"antrenorProfilePage"}><h1><IonLabel>{nume} {prenume}</IonLabel></h1></IonRow>
+            <IonRow ><h1 className={"numePrenume"}><IonLabel>{nume} {prenume}</IonLabel></h1></IonRow>
             <IonRow class={"antrenorProfilePageEmail"}><h1><IonLabel>{email}</IonLabel></h1></IonRow>
             <IonRow class={"antrenorProfilePageEmail"}>
                 <h1><IonLabel class={"spatiu"}>{varsta} ani</IonLabel>
@@ -73,7 +79,7 @@ const Client: React.FC<PaginaClientPropsExt> = ({id, nume, prenume, email, varst
             </IonRow>
 
             <IonRow class={"antrenorProfilePageDescriere"}><h1><IonTextarea>{descriere}</IonTextarea></h1></IonRow>
-
+</div>
         </IonList>
 
     );

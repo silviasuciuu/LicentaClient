@@ -42,6 +42,13 @@ import PaginaClient from "./pagina-client/profilePage/PaginaClient";
 import Evolutie from "./pagina-client/evolutionPage/Evolutie";
 import {EvolutieProvider} from "./pagina-client/evolutionPage/EvolutieProvider";
 import EditareClient from "./pagina-client/editPage/EditareClient";
+import {RecomandareProvider2} from "./pagina-client/pagina-recomandari2";
+import PaginaRecomandare from "./pagina-client/pagina-recomandari2/PaginaRecomandari2";
+import CPaginaAntrenor from "./pagina-client/pagina-recomandari2/pagina-profil-antrenor/CPaginaAntrenor";
+import {CAntrenorProvider} from "./pagina-client/pagina-recomandari2/pagina-profil-antrenor";
+import PaginaExperienta from "./pagina-client/pagina-recomandari2/experienta-antrenor/PaginaExperienta";
+import {ExperientaProvider} from "./pagina-client/pagina-recomandari2/experienta-antrenor/ExperientaProvider";
+
 
 const App: React.FC = () => (
     <IonApp>
@@ -72,12 +79,23 @@ const App: React.FC = () => (
                     <ClientProvider>
                         <Route path="/client" component={PaginaClient} exact={true}/>
                         <Route path="/client/edit" component={EditareClient} exact={true}/>
+                        <EvolutieProvider>
+                            <Route path="/evolution" component={Evolutie} exact={true}/>
+                        </EvolutieProvider>
+                        <RecomandareProvider2>
+                            <Route path="/recomandations" component={PaginaRecomandare} exact={true}/>
+                        </RecomandareProvider2>
+                        <CAntrenorProvider>
+                            <Route path="/recomandations/profile" component={CPaginaAntrenor} exact={true}/>
+                            <ExperientaProvider>
+                                <Route path="/recomandations/profile/experience" component={PaginaExperienta} exact={true}/>
 
+                            </ExperientaProvider>
+
+                        </CAntrenorProvider>
                     </ClientProvider>
-                    <EvolutieProvider>
-                        <Route path="/evolution" component={Evolutie} exact={true}/>
 
-                    </EvolutieProvider>
+
                     <Route exact path="/" render={() => <Redirect to="/login"/>}/>
                 </AuthProvider>
             </IonRouterOutlet>

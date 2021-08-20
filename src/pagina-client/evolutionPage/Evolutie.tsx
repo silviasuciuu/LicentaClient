@@ -7,14 +7,6 @@ import ReactFC from "react-fusioncharts";
 import {RouteComponentProps} from "react-router";
 import {getClientByIdd, getGreutatiById, modificaGreutate, salveazaGreutate} from "./EvolutieApi";
 import {EvolutieContext, setId} from "./EvolutieProvider";
-import {getExperienta, salveazaExperienta} from "../../pagina-antrenor/experiencePage/ExperientaApi";
-import {getSportIdByNume} from "../../signup/signup_antrenor_second_page/SportApi";
-import {getClientById} from "../profilePage/PaginaClientApi";
-
-interface ClientPropsExt extends RouteComponentProps<{
-    id?: string;
-}> {
-}
 
 ReactFC.fcRoot(FusionCharts, Charts, FusionTheme);
 
@@ -29,8 +21,6 @@ const Evolutie: React.FC<EvolutiePropsExt> = ({history, match}) => {
     const routeId = history.location.state.id
     setId(routeId)
     const {greutati, fetching, fetchingError} = useContext(EvolutieContext);
-
-    console.log(greutati, 'grrrrr')
     const dataSource = {
         data: [
             {label: "", value: ""},
