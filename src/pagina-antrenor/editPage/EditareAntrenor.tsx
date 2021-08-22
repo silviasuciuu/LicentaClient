@@ -10,7 +10,7 @@ import {
     IonPage, IonRadio, IonRadioGroup,
     IonTitle,
     IonToolbar,
-    IonImg, IonTextarea, IonList
+    IonImg, IonTextarea, IonList, IonRow
 } from '@ionic/react';
 import {AntrenorContext} from '../profilePage/PaginaAntrenorProvider';
 import {RouteComponentProps} from 'react-router';
@@ -41,7 +41,6 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
     const [photoToDelete, setPhotoToDelete] = useState<Photo>();
 
 
-
     useEffect(() => {
         //@ts-ignore
         const routeId = history.location.state.id
@@ -57,7 +56,6 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
 
         }
     }, [match.params.id, antrenor]);
-
 
 
     const handleSave = () => {
@@ -90,40 +88,119 @@ const EditareAntrenor: React.FC<AntrenorEditProps> = ({history, match}) => {
 
     return (
         <IonPage>
+            <IonButtons slot="end">
+                <IonButton onClick={handleSave}>
+                    Save
+                </IonButton>
+            </IonButtons>
+            <IonRow className="navbar-top">
+                <IonRow className="title">
+                    <IonLabel class={"mainh2"}>Editeaza profilul</IonLabel>
+                </IonRow>
+            </IonRow>
+
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Edit</IonTitle>
-                    <IonButtons slot="end">
-                        <IonButton onClick={handleSave}>
-                            Save
-                        </IonButton>
-                    </IonButtons>
+                    <IonTitle class="centered">Fit At Home</IonTitle>
                 </IonToolbar>
             </IonHeader>
+
+
             <IonContent>
 
                 <IonList>
 
 
-                    <IonInput className="inputField" placeholder={"Nume"} value={nume}
-                              onIonChange={e => setNume(e.detail.value || '')}/>
-                    <IonInput className="inputField" placeholder="Prenume" value={prenume}
-                              onIonChange={e => setPrenume(e.detail.value || '')}/>
-                    <IonInput type="number" placeholder="Varsta" value={varsta}
-                        // @ts-ignore
-                              onIonChange={e => setVarsta(parseInt(e.detail.value) || 0)}/>
-                    <IonTextarea value={descriere} placeholder="Descriere" onIonChange={e => setDescriere(e.detail.value || '')}>
+                    <IonRow className="sidenav">
+                        <IonRow className="profile">
 
-                    </IonTextarea>
 
-                    <IonImg
-                        style={{width: "100px", height: "100px", margin: "0 auto"}}
-                        onClick={() => {
-                            setPhotoToDelete(photos?.find(item => item.webviewPath === poza))
-                        }}
-                        alt={"No photo"}
-                        src={poza}
-                    />
+
+
+                            <IonImg
+                                style={{width: "100px", height: "100px", margin: "0 auto"}}
+                                onClick={() => {
+                                    setPhotoToDelete(photos?.find(item => item.webviewPath === poza))
+                                }}
+                                alt={"No photo"}
+                                src={poza}
+                            />
+
+
+
+                        </IonRow>
+                    </IonRow>
+
+                    <IonRow class={"main"}>
+                        <IonItem class={"card"}>
+                            <IonItem class={"card-body"}>
+
+                                <table>
+
+                                    <tbody>
+
+                                    <tr>
+                                        <td>Nume</td>
+                                        <td></td>
+                                        <td>
+                                            <IonInput className="inputField" placeholder={"Nume"} value={nume}
+                                                      onIonChange={e => setNume(e.detail.value || '')}/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>Prenume</td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+                                            <IonInput className="inputField" placeholder="Prenume" value={prenume}
+                                                      onIonChange={e => setPrenume(e.detail.value || '')}/>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>Varsta</td>
+                                        <td></td>
+                                        <td>
+                                            <IonInput type="number" placeholder="Varsta" value={varsta}
+                                                // @ts-ignore
+                                                      onIonChange={e => setVarsta(parseInt(e.detail.value) || 0)}/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Descriere</td><br/>
+                                        <td>:</td>
+                                        <td>
+                                            <IonTextarea value={descriere} placeholder="Descriere"
+                                                         onIonChange={e => setDescriere(e.detail.value || '')}>
+
+                                            </IonTextarea>
+                                        </td>
+                                    </tr>
+
+
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </IonItem>
+
+
+                        </IonItem>
+                    </IonRow>
+
+
+
+
+
+
+
+
                 </IonList>
 
                 <IonLoading isOpen={saving}/>

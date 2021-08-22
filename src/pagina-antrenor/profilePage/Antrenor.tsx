@@ -20,7 +20,6 @@ import {PaginaAntrenorProps} from "./PaginaAntrenorProps";
 interface PaginaAntrenorPropsExt extends PaginaAntrenorProps {
     onEdit: (id?: string) => void;
     onExperienceEdit: (id?: string) => void;
-    onGallery: (id?: string) => void;
     onLogOut: () => void;
 
 
@@ -28,52 +27,68 @@ interface PaginaAntrenorPropsExt extends PaginaAntrenorProps {
 
 
 
-const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, varsta, nota, descriere, poza,numar_telefon,onEdit,onExperienceEdit,onGallery,onLogOut}) => {
-    const [mQuery, setMQuery] = React.useState<any>({
-        matches: window.innerWidth > 768 ? true : false,
-    });
+const Antrenor: React.FC<PaginaAntrenorPropsExt> = ({id, nume, prenume, email, varsta, nota, descriere, poza,numar_telefon,onEdit,onExperienceEdit,onLogOut}) => {
 
-    useEffect(() => {
-        let mediaQuery = window.matchMedia("(min-width: 768px)");
-        mediaQuery.addListener(setMQuery);
 
-        return () => mediaQuery.removeListener(setMQuery);
-    }, []);
 
-    console.log(descriere)
+
     return (
-
         <IonList>
             <IonToolbar>
-                <IonTitle>Profilul meu de antrenor</IonTitle>
                 <IonButtons slot="end">
-                    <div>
-                        {mQuery && !mQuery.matches ? (
-                            <IonMenuButton/>
-                        ) : (
-                            <>
-
-                                <IonButton onClick={() => onEdit(id)}>Editeaza profilul </IonButton>
-                                <IonButton onClick={() => onGallery(id)}>Galerie foto</IonButton>
-                                <IonButton onClick={() => onExperienceEdit(id)}>Experienta mea</IonButton>
-                                <IonButton onClick={() => onLogOut()}>LogOut</IonButton>
-
-
-                            </>
-                        )}
-                    </div>
+                    <IonList>
+                        <IonButton onClick={() => onEdit(id)}>Editeaza profilul </IonButton>
+                        <IonButton onClick={() => onExperienceEdit(id)}>Experienta mea</IonButton>
+                        <IonButton onClick={() => onLogOut()}>LogOut</IonButton>
+                    </IonList>
                 </IonButtons>
             </IonToolbar>
-            <IonRow class={"antrenorProfilePage"}> <IonLabel><IonImg style={{width: "100px"}} alt={"No Photo"}
-                                                                     src={poza}/></IonLabel></IonRow>
-            <IonRow class={"antrenorProfilePage"}><h1><IonLabel>{nume} {prenume}</IonLabel></h1></IonRow>
-            <IonRow class={"antrenorProfilePageEmail"}><h1><IonLabel>{email}</IonLabel></h1></IonRow>
-            <IonRow class={"antrenorProfilePageEmail"}><h1><IonLabel>{numar_telefon}</IonLabel></h1></IonRow>
-
-            <IonRow class={"antrenorProfilePageEmail"}><h1><IonLabel class={"spatiuAntrenor"}>{varsta} ani</IonLabel>
-            </h1>
+            <IonRow className="sidenav">
+                <IonRow className="profile">
+                    <img src={poza} className={"profileimg"} alt="" style={{width: "100px", height: "100px"}}></img>
+                </IonRow>
             </IonRow>
-            <IonRow class={"antrenorProfilePageDescriere"}><h1><IonTextarea>{descriere}</IonTextarea></h1></IonRow>
+
+            <IonRow class={"main"}>
+                <IonItem class={"card"}>
+                    <IonItem class={"card-body"}>
+
+                        <table>
+
+                            <tbody>
+
+                            <tr>
+                                <td>Nume</td>
+                                <td></td>
+                                <td> {nume} {prenume}</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td> </td>
+                                <td> {email}</td>
+                            </tr>
+                            <tr>
+                                <td>Varsta</td>
+                                <td></td>
+                                <td> {varsta} ani</td>
+                            </tr>
+
+                            <tr>
+                                <td>Numar telefon</td>
+                                <td></td>
+                                <td> {numar_telefon}</td>
+                            </tr>
+
+                            <tr>
+                                <td>{descriere}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </IonItem>
+
+
+                </IonItem>
+            </IonRow>
 
         </IonList>
 

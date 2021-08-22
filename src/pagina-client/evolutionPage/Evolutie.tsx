@@ -1,5 +1,16 @@
 import React, {useContext} from "react";
-import {IonApp, IonButton, IonInput, IonItem, IonLabel, IonPage} from "@ionic/react";
+import {
+    IonApp,
+    IonButton, IonButtons,
+    IonHeader,
+    IonInput,
+    IonItem,
+    IonLabel,
+    IonPage,
+    IonRow,
+    IonTitle,
+    IonToolbar
+} from "@ionic/react";
 import FusionCharts from "fusioncharts";
 import Charts from "fusioncharts/fusioncharts.charts";
 import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
@@ -97,8 +108,36 @@ const Evolutie: React.FC<EvolutiePropsExt> = ({history, match}) => {
 
     return (
         <IonApp>
+            <IonRow className="navbar-top">
+                <IonRow className="title">
+                    <IonLabel class={"mainh2"}>Evolutie/Adauga greutate</IonLabel>
+                </IonRow>
+            </IonRow>
+
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle class="centered">Fit At Home</IonTitle>
+                </IonToolbar>
+            </IonHeader>
             <ReactFC {...chartConfigs} />
             <IonItem>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <IonLabel>Adauga greutate</IonLabel>
 
                 <IonInput
@@ -109,8 +148,16 @@ const Evolutie: React.FC<EvolutiePropsExt> = ({history, match}) => {
                 >
 
                 </IonInput>
+                <IonButtons slot="end">
+                    <IonButton onClick={handleAdaugaGreutate}>Adauga</IonButton>
+                </IonButtons>
             </IonItem>
-            <IonButton onClick={handleAdaugaGreutate}>Adauga greutate</IonButton>
+
+
+
+
+
+
         </IonApp>
     );
 };

@@ -9,7 +9,7 @@ import {
     IonLoading,
     IonImg,
     IonFab,
-    IonInput
+    IonInput, IonRow, IonHeader, IonToolbar, IonTitle, IonTextarea, IonButtons
 } from '@ionic/react';
 
 import {match, RouteComponentProps, useHistory} from "react-router";
@@ -30,10 +30,9 @@ const EditareExperienta: React.FC<EditarePropsExt> = ({history, match}) => {
     try {
         //@ts-ignore
         const routeId = history.location.state.id
-
         setId(Number(routeId))
         const handleAlegereSporturi = async () => {
-            const routeId = match.params.id || '';
+
             const sports = await getExperienta(Number(routeId));
             // @ts-ignore
 
@@ -46,7 +45,6 @@ const EditareExperienta: React.FC<EditarePropsExt> = ({history, match}) => {
 
                     // @ts-ignore
                     let sid = await getSportIdByNume(sports[i].denumire)
-
                     // @ts-ignore
                     salveazaExperienta(Number(routeId), sid[0].id, val.toString())
                 }
@@ -57,27 +55,85 @@ const EditareExperienta: React.FC<EditarePropsExt> = ({history, match}) => {
 
         return (
             <IonPage>
+                <IonRow className="navbar-top">
+                    <IonRow className="title">
+                        <IonLabel class={"mainh2"}>Editare experienta</IonLabel>
+                    </IonRow>
+                </IonRow>
+                <IonButtons slot="end">
+                    <IonButton onClick={handleAlegereSporturi}>
+                        Save
+                    </IonButton>
+                </IonButtons>
+                <IonHeader>
+                    <IonToolbar>
+                        <IonTitle class="centered">Fit At Home</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
                 <IonContent>
                     <IonLoading isOpen={fetching} message="Fetching sports"/>
                     {sports && (
+
+
                         <IonList>
-                            {sports.map(({denumire, experienta}) =>
+                            <>
+                                <IonRow class={"main"}>
+                                    <IonItem class={"card2"}>
+                                        <IonItem class={"card-body"}>
 
-                                // @ts-ignore
-                                <Sport key={denumire} denumire={denumire} experienta={experienta}
+                                            <table>
+
+                                                <tbody>
 
 
-                                />
-                            )}
+                                                {sports.map(({denumire, experienta}) =>
+
+
+                                                    <>
+
+
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>
+                                                                <Sport key={denumire} denumire={denumire}
+                                                                       experienta={experienta}
+
+
+                                                                />
+                                                            </td>
+                                                        </tr>
+
+                                                    </>,
+                                                )}
+
+                                                <IonRow className="sidenav">
+                                                    <IonRow className="profile">
+
+
+                                                    </IonRow>
+                                                </IonRow>
+
+
+                                                </tbody>
+                                            </table>
+
+                                        </IonItem>
+
+
+                                    </IonItem>
+                                </IonRow></>
+
                         </IonList>
+
+
                     )}
                     {fetchingError && (
-                        <div>{fetchingError.message || 'Failed to fetch students'}</div>
+                        <div>{fetchingError.message || 'Failed to fetch '}</div>
                     )}
 
 
                 </IonContent>
-                <IonButton onClick={handleAlegereSporturi}>Finalizare</IonButton>
             </IonPage>
 
         )

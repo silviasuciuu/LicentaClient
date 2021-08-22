@@ -9,7 +9,7 @@ import {
     IonLoading,
     IonImg,
     IonFab,
-    IonInput
+    IonInput, IonRow, IonHeader, IonToolbar, IonTitle
 } from '@ionic/react';
 
 import {match, RouteComponentProps, useHistory} from "react-router";
@@ -33,6 +33,23 @@ const PaginaRecomandari: React.FC<PaginaRecomandariPropsExt> = ({history, match}
 
         return (
             <IonPage>
+
+
+
+                <IonRow className="navbar-top">
+                    <IonRow className="title">
+                        <IonLabel class={"mainh2"}>Recomandari antrenori</IonLabel>
+                    </IonRow>
+                </IonRow>
+
+                <IonHeader>
+                    <IonToolbar>
+                        <IonTitle class="centered">Fit At Home</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
+
+
+
                 <IonContent>
                     <IonLoading isOpen={fetching} message="Fetching recoms"/>
                     {recomandari && (

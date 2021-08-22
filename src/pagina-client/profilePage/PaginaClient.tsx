@@ -9,12 +9,13 @@ import {
     IonLoading,
     IonImg,
     IonFab,
-    IonHeader, IonToolbar, IonTitle
+    IonHeader, IonToolbar, IonTitle, IonRow
 } from '@ionic/react';
 
 import {RouteComponentProps, useHistory, withRouter} from "react-router";
 import Client from "./Client";
 import {ClientContext} from "./PaginaClientProvider";
+import {inspect} from "util";
 
 interface ClientPropsExt extends RouteComponentProps<{
     id?: string;
@@ -29,18 +30,26 @@ const PaginaClient: React.FC<ClientPropsExt> = ({history, match}) => {
         const arr = client?.filter(a => a.id == routeId)
 
         return (
-            <IonPage >
 
-                    <IonHeader>
 
-                        <IonToolbar>
-                            <IonTitle class="centered">Fit At Home</IonTitle>
-                            <IonTitle class="subtitle">Profilul meu</IonTitle>
+            <IonPage>
 
-                        </IonToolbar>
-                    </IonHeader>
+                <IonRow className="navbar-top">
+                    <IonRow className="title">
+                        <IonLabel class={"mainh2"}>Profilul meu</IonLabel>
+                    </IonRow>
+                </IonRow>
 
-                <IonContent >
+
+                <IonHeader>
+
+                    <IonToolbar>
+                        <IonTitle class="centered">Fit At Home</IonTitle>
+
+                    </IonToolbar>
+                </IonHeader>
+
+                <IonContent>
                     <IonLoading isOpen={fetching} message="Fetching client"/>
                     {arr && (
                         <IonList>
@@ -67,7 +76,6 @@ const PaginaClient: React.FC<ClientPropsExt> = ({history, match}) => {
                                             state: {id: id}
                                         })
                                         }
-
 
 
                                         onLogOut={() => history.push({

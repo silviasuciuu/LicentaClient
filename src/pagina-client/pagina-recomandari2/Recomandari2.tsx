@@ -18,13 +18,21 @@ const RecomandareElem2: React.FC<RecomandareProps2> = ({id, nume, prenume, email
 
 
     return (
+
+
+
+
         <IonItem id={id}>
             <IonImg style={{width: "100px"}} alt={"No Photo"}
                     src={poza}/>
             <IonLabel>{nume} {prenume}</IonLabel><br/>
-            <IonLabel> {email}</IonLabel>
 
-            <IonLabel>  {numar_telefon}</IonLabel>
+            <IonLabel>{numar_telefon}</IonLabel><br/>
+
+
+
+
+
             <IonButton onClick={()=>openProfile(id)}>Vizualizeaza profilul</IonButton>
             <input type="image" src="https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN" style={{width: "50px"}}
                    onClick={() => openWhatsapp(id)}

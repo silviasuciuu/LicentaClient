@@ -1,5 +1,16 @@
 import React, {useContext, useState} from 'react';
-import {IonItem, IonLabel, IonButton, IonList, IonContent, IonPage, IonLoading, IonImg, IonFab} from '@ionic/react';
+import {
+    IonItem,
+    IonLabel,
+    IonButton,
+    IonList,
+    IonContent,
+    IonPage,
+    IonLoading,
+    IonImg,
+    IonFab,
+    IonRow, IonHeader, IonToolbar, IonTitle
+} from '@ionic/react';
 
 import {RouteComponentProps, useHistory, withRouter} from "react-router";
 
@@ -23,6 +34,17 @@ const CPaginaAntrenor: React.FC<AntrenorPropsExt> = ({history, match}) => {
 
         return (
             <IonPage>
+                <IonRow className="navbar-top">
+                    <IonRow className="title">
+                        <IonLabel class={"mainh2"}>Profilul antrenorului</IonLabel>
+                    </IonRow>
+                </IonRow>
+
+                <IonHeader>
+                    <IonToolbar>
+                        <IonTitle class="centered">Fit At Home</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
                 <IonContent>
                     <IonLoading isOpen={fetching} message="Fetching antrenor"/>
                     {arr && (
