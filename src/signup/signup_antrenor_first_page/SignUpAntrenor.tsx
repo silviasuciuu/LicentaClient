@@ -12,7 +12,7 @@ import {
     IonPage,
     IonRow,
     IonTitle,
-    IonToolbar, IonIcon, IonActionSheet
+    IonToolbar, IonIcon, IonActionSheet, IonApp, IonButtons, IonList, IonSelect, IonSelectOption, IonFooter
 } from '@ionic/react';
 import {SignUpAntrenorContext} from "./SignUpAntrenorProvider";
 import {Photo, usePhotoGallery} from "./usePhotoGallery";
@@ -70,206 +70,282 @@ const SignUpAntrenor: React.FC<RouteComponentProps> = ({history}) => {
 
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Inregistrare antrenor</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent>
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonLabel position="floating"> Nume</IonLabel>
-                            <IonInput
-                                type="text"
-                                value={nume}
-                                onIonChange={e => setState({
-                                    ...state,
-                                    nume: e.detail.value || ''
-                                })}
-                            >
-                            </IonInput>
-                        </IonItem>
-                    </IonCol>
+            <IonApp>
+                <IonButtons slot="end">
+                    <IonButton onClick={handleLSignUpAntrenor}>
+                        Salveaza
+                    </IonButton>
+                </IonButtons>
+                <IonRow className="navbar-top">
+                    <IonRow className="title">
+                        <IonLabel class={"mainh2"}>Inregistrare antrenor</IonLabel>
+                    </IonRow>
                 </IonRow>
 
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonLabel position="floating"> Prenume</IonLabel>
-                            <IonInput
-                                type="text"
-                                value={prenume}
-
-                                onIonChange={e => setState({
-                                    ...state,
-                                    prenume: e.detail.value || ''
-                                })}
-                            >
-                            </IonInput>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
+                <IonHeader>
+                    <IonToolbar>
+                        <IonTitle class="centered">Fit At Home</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
 
 
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonLabel position="floating"> Email</IonLabel>
-                            <IonInput
-                                type="email"
-                                value={email}
-                                onIonChange={e => setState({
-                                    ...state,
-                                    email: e.detail.value || ''
-                                })}
-                            >
-                            </IonInput>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
+                <IonContent>
+
+                    <IonList>
 
 
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonLabel position="floating"> Parola</IonLabel>
-                            <IonInput
-                                id={"p1"}
-                                type="password"
-                                value={parola}
-                                onIonChange={e => setState({
-                                    ...state,
-                                    parola: e.detail.value || ''
-                                })}
-                            >
-                            </IonInput>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
+                        <IonRow className="sidenav">
+                            <IonRow className="profile">
 
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonLabel position="floating">Confirma parola</IonLabel>
-                            <IonInput
-                                id={"p2"}
-                                type="password"
-                                value={confirma_parola}
-                                onIonChange={e => setConfirma_parola(e.detail.value!)}
-                            >
-                            </IonInput>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
+                                <IonImg
+                                    style={{width: "150px", height: "150px", margin: "0 auto"}}
+                                    onClick={() => {
+                                        setPhotoToDelete(photos?.find(item => item.webviewPath === photoPath))
+                                    }}
+                                    alt={"Poza de profil"}
+                                    src={photoPath}
+                                />
 
 
 
+                            </IonRow>
+                        </IonRow>
 
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonLabel position="floating"> Numar telefon(Whatsapp)</IonLabel>
-                            <IonInput
-                                value={numar_telefon}
-                                // @ts-ignore
-                                min={0}
-                                onIonChange={e => setState({
-                                    ...state,
-                                    //@ts-ignore
-                                    numar_telefon: e.detail.value || ''
-                                })}
-                            >
-                            </IonInput>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
+                        <IonRow class={"main"}>
+                            <IonItem class={"card3"}>
+                                <IonItem class={"card-body"}>
 
+                                    <table>
 
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonLabel position="floating"> Varsta</IonLabel>
-                            <IonInput
-                                type="number"
-                                value={varsta}
-                                // @ts-ignore
-                                min={0}
-                                onIonChange={e => setState({
-                                    ...state,
-                                    //@ts-ignore
-                                    varsta: parseInt(e.detail.value) || 0
-                                })}
-                            >
-                            </IonInput>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
+                                        <tbody>
+
+                                        <tr>
+                                            <td>Nume</td>
+                                            <td></td>
+                                            <td>
+
+                                                <IonInput
+                                                    type="text"
+                                                    value={nume}
+                                                    onIonChange={e => setState({
+                                                        ...state,
+                                                        nume: e.detail.value || ''
+                                                    })}
+                                                >
+                                                </IonInput>
+                                            </td>
+                                        </tr>
 
 
-                <IonRow>
-                    <IonCol>
-                        <IonItem>
-                            <IonLabel position="floating"> Descriere</IonLabel>
-                            <IonTextarea value={descriere} onIonChange={e => setState({
-                                ...state,
-                                //@ts-ignore
-                                descriere: e.detail.value || ''
-                            })}></IonTextarea>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
+                                        <tr>
+                                            <td>Prenume</td>
+                                            <td>
+
+                                            </td>
+                                            <td>
+                                                <IonInput
+                                                    type="text"
+                                                    value={prenume}
+
+                                                    onIonChange={e => setState({
+                                                        ...state,
+                                                        prenume: e.detail.value || ''
+                                                    })}
+                                                >
+                                                </IonInput>
+                                            </td>
+                                        </tr>
 
 
-                <IonImg
-                    style={{width: "200px", height: "200px", margin: "0 auto"}}
-                    onClick={() => {
-                        setPhotoToDelete(photos?.find(item => item.webviewPath === photoPath))
-                    }}
-                    alt={"Poza de profil"}
-                    src={photoPath}
-                />
-                <IonFab vertical="bottom" horizontal="start">
-                    <IonFabButton
-                        onClick={() => {
-                            const photoTaken = takePhoto();
-                            photoTaken.then((data) => {
-                                setPhotoPath(data.webviewPath!);
-                            });
-                        }}
-                    >
-                        <IonIcon icon={camera}/>
-                    </IonFabButton>
-                </IonFab>
+
+                                        <tr>
+                                            <td>Email</td>
+                                            <td>
+
+                                            </td>
+                                            <td>
+                                                <IonInput
+                                                    type="text"
+                                                    value={email}
+
+                                                    onIonChange={e => setState({
+                                                        ...state,
+                                                        email: e.detail.value || ''
+                                                    })}
+                                                >
+                                                </IonInput>
+                                            </td>
+                                        </tr>
 
 
-                <IonActionSheet
-                    isOpen={!!photoToDelete}
-                    buttons={[
-                        {
-                            text: "Delete",
-                            role: "destructive",
-                            icon: trash,
-                            handler: () => {
-                                if (photoToDelete) {
-                                    deletePhoto(photoToDelete);
-                                    setPhotoToDelete(undefined);
-                                    setPhotoPath("")
-                                }
+
+
+                                        <tr>
+                                            <td>Parola</td>
+                                            <td>
+
+                                            </td>
+                                            <td>
+                                                <IonInput
+                                                    id={"p1"}
+                                                    type="password"
+                                                    value={parola}
+                                                    onIonChange={e => setState({
+                                                        ...state,
+                                                        parola: e.detail.value || ''
+                                                    })}
+                                                >
+                                                </IonInput>
+                                            </td>
+                                        </tr>
+
+
+
+
+                                        <tr>
+                                            <td>Confirma parola</td>
+                                            <td>
+
+                                            </td>
+                                            <td>
+                                                <IonInput
+                                                    id={"p2"}
+                                                    type="password"
+                                                    value={confirma_parola}
+                                                    onIonChange={e => setConfirma_parola(e.detail.value!)}
+                                                >
+                                                </IonInput>
+                                            </td>
+                                        </tr>
+
+
+
+
+
+
+
+
+
+                                        <tr>
+                                            <td>Numar telefon(Whatsapp)</td>
+                                            <td></td>
+                                            <td>
+                                                <IonInput
+                                                    value={numar_telefon}
+                                                    // @ts-ignore
+                                                    min={0}
+                                                    onIonChange={e => setState({
+                                                        ...state,
+                                                        //@ts-ignore
+                                                        numar_telefon: e.detail.value || ''
+                                                    })}
+                                                >
+                                                </IonInput>
+                                            </td>
+                                        </tr>
+
+
+
+
+
+
+
+
+
+
+
+                                        <tr>
+                                            <td>Varsta</td><br/>
+                                            <td>:</td>
+                                            <td>
+                                                <IonInput
+                                                    type="number"
+                                                    value={varsta}
+                                                    // @ts-ignore
+                                                    min={0}
+                                                    onIonChange={e => setState({
+                                                        ...state,
+                                                        //@ts-ignore
+                                                        varsta: parseInt(e.detail.value) || 0
+                                                    })}
+                                                >
+                                                </IonInput>
+                                            </td>
+                                        </tr>
+
+
+
+
+
+                                        <tr>
+                                            <td>Descriere</td><br/>
+                                            <td>:</td>
+                                            <td>
+                                                <IonTextarea value={descriere} onIonChange={e => setState({
+                                                    ...state,
+                                                    //@ts-ignore
+                                                    descriere: e.detail.value || ''
+                                                })}>
+
+                                                </IonTextarea>
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </IonItem>
+
+
+                            </IonItem>
+                        </IonRow>
+                    </IonList>
+
+                    <IonFooter class={"toolbar-background"}>
+                        <IonToolbar>
+
+
+                            <IonFab vertical="bottom" horizontal="start">
+                                <IonFabButton
+                                    onClick={() => {
+                                        const photoTaken = takePhoto();
+                                        photoTaken.then((data) => {
+                                            setPhotoPath(data.webviewPath!);
+                                        });
+
+                                    }}
+                                >
+                                    <IonIcon icon={camera}/>
+                                </IonFabButton>
+                            </IonFab>
+
+                        </IonToolbar>
+                    </IonFooter>
+                    <IonActionSheet
+                        isOpen={!!photoToDelete}
+                        buttons={[
+                            {
+                                text: "Delete",
+                                role: "destructive",
+                                icon: trash,
+                                handler: () => {
+                                    if (photoToDelete) {
+                                        deletePhoto(photoToDelete);
+                                        setPhotoToDelete(undefined);
+                                        setPhotoPath("")
+                                    }
+                                },
                             },
-                        },
-                        {
-                            text: "Cancel",
-                            icon: close,
-                            role: "cancel",
-                        },
-                    ]}
-                    onDidDismiss={() => setPhotoToDelete(undefined)}
-                />
+                            {
+                                text: "Cancel",
+                                icon: close,
+                                role: "cancel",
+                            },
+                        ]}
+                        onDidDismiss={() => setPhotoToDelete(undefined)}
+                    />
 
-
-                <IonButton onClick={handleLSignUpAntrenor}>Next</IonButton>
-            </IonContent>
+                </IonContent>
+            </IonApp>
         </IonPage>
     );
 };

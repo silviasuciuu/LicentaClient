@@ -57,9 +57,14 @@ const EditareExperienta: React.FC<EditarePropsExt> = ({history, match}) => {
             <IonPage>
                 <IonRow className="navbar-top">
                     <IonRow className="title">
-                        <IonLabel class={"mainh2"}>Editare experienta</IonLabel>
+                        <IonLabel class={"mainh2"}>Experienta</IonLabel>
                     </IonRow>
                 </IonRow>
+
+
+
+
+
                 <IonButtons slot="end">
                     <IonButton onClick={handleAlegereSporturi}>
                         Save

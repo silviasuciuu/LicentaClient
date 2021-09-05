@@ -25,7 +25,6 @@ export const getExperienta: (id: number) => Promise<ExperienceProps> = (id) => {
 
 export const salveazaExperienta: (id_antrenor: number, id_sport: number, experienta: number) => Promise<SportProps[]> = (id_antrenor, id_sport, experienta) => {
 
-    alert(id_antrenor)
     return withLogs(axios.put(experUrl + '/edit', {
         'antrenor': id_antrenor,
         'sport':id_sport,

@@ -1,5 +1,16 @@
 import React, {useContext, useState} from 'react';
-import {IonItem, IonLabel, IonButton, IonList, IonContent, IonPage, IonLoading, IonImg, IonFab} from '@ionic/react';
+import {
+    IonItem,
+    IonLabel,
+    IonButton,
+    IonList,
+    IonContent,
+    IonPage,
+    IonLoading,
+    IonImg,
+    IonFab,
+    IonRow, IonHeader, IonToolbar, IonTitle, IonButtons
+} from '@ionic/react';
 import {SportProps} from "./SportProps";
 import Sport from "./Sport";
 
@@ -53,12 +64,77 @@ const SportPage: React.FC<SportPropsExt> = ({}) => {
     // @ts-ignore
     return (
         <IonPage>
+
+
+
+            <IonRow className="navbar-top">
+                <IonRow className="title">
+                    <IonLabel class={"mainh2"}>Experienta</IonLabel>
+                </IonRow>
+            </IonRow>
+            <IonButtons slot="end">
+                <IonButton onClick={handleAlegereSporturi}>Finalizare</IonButton>
+
+            </IonButtons>
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle class="centered">Fit At Home</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+
+
             <IonContent>
                 <IonLoading isOpen={fetching} message="Fetching sports"/>
                 {sports && (
                     <IonList>
-                        {sports.map(({denumire, experienta}) =>
-                            <Sport key={denumire} denumire={denumire} experienta={experienta}/>)}
+                        <>
+                            <IonRow class={"main"}>
+                                <IonItem class={"card2"}>
+                                    <IonItem class={"card-body"}>
+
+                                        <table>
+
+                                            <tbody>
+
+
+                                            {sports.map(({denumire, experienta}) =>
+
+
+                                                <>
+
+
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>
+                                                            <Sport key={denumire} denumire={denumire}
+                                                                   experienta={experienta}
+
+
+                                                            />
+                                                        </td>
+                                                    </tr>
+
+                                                </>,
+                                            )}
+
+                                            <IonRow className="sidenav">
+                                                <IonRow className="profile">
+
+
+                                                </IonRow>
+                                            </IonRow>
+
+
+                                            </tbody>
+                                        </table>
+
+                                    </IonItem>
+
+
+                                </IonItem>
+                            </IonRow></>
+
                     </IonList>
                 )}
                 {fetchingError && (
@@ -67,7 +143,8 @@ const SportPage: React.FC<SportPropsExt> = ({}) => {
 
 
             </IonContent>
-            <IonButton onClick={handleAlegereSporturi}>Finalizare</IonButton>
+
+
         </IonPage>
 
     )

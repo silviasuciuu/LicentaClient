@@ -521,7 +521,7 @@ body {
   background-color: #fff;
   border-radius: 18px;
   box-shadow: 1px 1px 8px 0 grey;
-  height: 350px;
+  height: 700px;
   width: 500px;
   margin-bottom: 20px;
   padding: 20px 0 20px 50px;
@@ -567,6 +567,14 @@ body {
   color: #25d366 !important;
 }
 
-
+.main .card3 {
+  background-color: #fff;
+  border-radius: 18px;
+  box-shadow: 1px 1px 8px 0 grey;
+  height: 800px;
+  width: 500px;
+  margin-bottom: 20px;
+  padding: 20px 0 20px 50px;
+}
 
 /* End */
